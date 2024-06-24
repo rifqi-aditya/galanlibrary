@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+.nunito {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+span.card-icon {
+    font-size: 3rem;
+}
+
+.progressbar {
+    width: 100%;
+    margin: 10px auto;
+    border: solid 1px #000;
+}
+
+.progressbar .inner {
+    height: 15px;
+    animation: progressbar-countdown;
+    animation-duration: 40s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+    animation-timing-function: linear;
+}
+
+@keyframes progressbar-countdown {
+    0% {
+        width: 100%;
+        background: #0F0;
+    }
+
+    100% {
+        width: 0%;
+        background: #F00;
+    }
+}
+
+.google-chart-wrap {
+    position: relative;
+    padding-bottom: 50%;
+    height: 0;
+    overflow: hidden;
+}
+
+.google-chart-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
