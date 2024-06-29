@@ -4,12 +4,16 @@
     <div class="row">
         <div class="col-lg-6 mx-auto">
             <h4 class="text-center mb-3">
-                Login Ke Aplikasi
+                Registrasi Akun Baru
             </h4>
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('login') }}" method="POST">
+                    <form action="{{ route('register') }}" method="POST">
                         @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                        </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
@@ -18,14 +22,16 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                        </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-primary">Registrasi</button>
                         </div>
                     </form>
                     <div class="mt-3 text-center">
-                        <a href="{{ route('password.request') }}" class="link-primary">Lupa password?</a>
-                        |
-                        <a href="{{ route('register') }}" class="link-primary">Registrasi akun baru</a>
+                        <a href="{{ route('login') }}" class="link-primary">Sudah punya akun?</a>
                     </div>
                 </div>
             </div>

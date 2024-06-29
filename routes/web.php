@@ -112,7 +112,5 @@ Route::get('/reports', [ReportController::class, 'index'])->middleware(['auth', 
 Route::get('/reports/borrowings', [ReportController::class, 'borrowings'])->middleware(['auth', 'permission:create.reports'])->name('report.borrowings');
 Route::get('/reports/attendances', [ReportController::class, 'attendances'])->middleware(['auth', 'permission:create.reports'])->name('report.attendances');
 
-Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-Route::get('/test', function(){
-    return view('test.test');
-});
+// TODO: Wishlist
+// Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
