@@ -18,6 +18,7 @@
                     <th>Jumlah Pinjam</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Pengembalian</th>
+                    <th>Denda</th>
                     @canany(['update.borrowings', 'delete.borrowings'])
                         <th class="text-center">Actions</th>
                     @endcanany
@@ -32,6 +33,10 @@
                         <td>{{ $activeBorrowing->number_of_books }}</td>
                         <td>{{ $activeBorrowing->created_at->format('d F Y') }}</td>
                         <td>{{ $activeBorrowing->should_return_at->format('d F Y') }}</td>
+                        @if ($activeBorrowing->fine != null)
+                            <td>Rp. {{ sprintf('%s,00', number_format($activeBorrowing->fine, 0, ',', '.')) }}</td>
+                        @endif
+                        <td class="text-center">-</td>
                         <td class="text-center">
                             <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
                                 class="link-primary material-icons text-decoration-none">

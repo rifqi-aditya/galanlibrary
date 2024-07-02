@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 @section('main')
     <h3 class="mb-4">Peminjaman Buku Saya</h3>
     <div class="mb-3">
@@ -33,6 +37,17 @@
                     </div>
                 </div>
             @else
+                @if (Carbon::now()->diffInHours($borrowing->should_return_at, false) < 24 && Carbon::now()->diffInHours($borrowing->should_return_at, false) >= 0)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Hai!</strong> 
+                        <br>
+                        <p>
+                            Hanya ingin mengingatkan bahwa batas waktu pengembalian buku kamu sudah dekat. 
+                            Pastikan untuk mengembalikan buku-buku yang kamu pinjam tepat waktu agar tidak dikenakan denda.
+                        </p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="alert alert-warning">
                     <div class="row">
                         <div class="col-lg-9 mb-3 mb-lg-0">
@@ -44,8 +59,17 @@
                                 <br>
                                 Batas Pengembalian: {{ $borrowing->should_return_at->format('d F Y') }}
                                 <br>
-                                Sisa waktu peminjaman:
-                                <strong>{{ $borrowing->should_return_at->diffInDays(now()) }} Hari.</strong>
+                                Sisa waktu Peminjaman:
+                                @if (now() > $borrowing->should_return_at)
+                                    <strong>0 Hari.</strong>
+                                @else
+                                    <strong>{{ $borrowing->should_return_at->diffInDays(now()) }} Hari.</strong>
+                                @endif
+                                @if ($borrowing->fine != null) 
+                                    <br>
+                                    Denda Peminjaman :
+                                    <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
+                                @endif
                             </p>
                         </div>
                         <div class="col-lg-3 mb-3 mb-lg-0 text-lg-end">

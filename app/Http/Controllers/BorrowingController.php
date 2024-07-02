@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Borrowing;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,12 @@ class BorrowingController extends Controller
     {
         $activeBorrowings = Borrowing::with(['user', 'book'])->where('return_date', '=', null)->orderBy('created_at', 'DESC')->get();
         $returnedBorrowings = Borrowing::with(['user', 'book'])->where('return_date', '!=', null)->orderBy('return_date', 'DESC')->get();
-
+        
+        foreach ($activeBorrowings as $borrowing) {
+            $borrowing->fine = $this->calculateFine($borrowing);
+            $borrowing->save();
+        }
+        
         return view('borrowing.index', [
             'activeBorrowings' => $activeBorrowings,
             'returnedBorrowings' => $returnedBorrowings,
@@ -228,5 +234,18 @@ class BorrowingController extends Controller
             return redirect($input['redirect-to'])->with('success', 'Terima kasih, Buku ' . $borrowing->book->title . ' berhasil ditandai sudah dikembalikan.');
         }
         return to_route('borrowing.index')->with('success', 'Terima kasih, Buku ' . $borrowing->book->title . ' berhasil ditandai sudah dikembalikan.');
+    }
+
+    public function calculateFine($borrowing)
+    {
+        $today = Carbon::today();
+        $shouldReturnAt = Carbon::parse($borrowing->should_return_at);
+
+        if ($today->greaterThan($shouldReturnAt)) {
+            $daysLate = $today->diffInDays($shouldReturnAt);
+            return $daysLate * 5000;
+        }
+
+        return 0;
     }
 }

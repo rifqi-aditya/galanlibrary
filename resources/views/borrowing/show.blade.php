@@ -58,6 +58,11 @@
                         <strong>{{ $borrowing->should_return_at->diffInDays(now()) }} Hari.</strong>
                     @endif
                 </p>
+                @if ($borrowing->fine != null)
+                    <p>Denda : 
+                        <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
+                    </p>
+                @endif
                 <div>
                     <form action="{{ route('borrowing.return', ['borrowing' => $borrowing]) }}" method="post">
                         @csrf
@@ -80,6 +85,11 @@
                     <br>
                     Status pengembalian:
                     <strong>{{ $borrowing->return_status }}</strong>
+                    <br>
+                    @if ($borrowing->fine != null)
+                    Denda pengembalian : 
+                    <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
+                    @endif
                 </p>
             </div>
         @endif

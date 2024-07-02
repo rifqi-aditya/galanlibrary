@@ -9,8 +9,8 @@ class PageController extends Controller
         return view('page.attendance-scanner');
     }
 
-    public function attendanceQR()
+    public function survey()
     {
-        return view('page.attendance');
+        return view('page.survey');
     }
 }

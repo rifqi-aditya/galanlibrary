@@ -51,6 +51,11 @@
                         <strong>{{ $borrowing->should_return_at->diffInDays(now()) }} Hari.</strong>
                     @endif
                 </p>
+                @if ($borrowing->fine != null)
+                    <p>Denda : 
+                        <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
+                    </p>
+                @endif
             </div>
         @else
             <div class="alert alert-success text-center">
