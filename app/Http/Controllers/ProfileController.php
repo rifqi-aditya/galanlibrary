@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Borrowing;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -129,6 +130,11 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $borrowings = Borrowing::with(['book'])->where('user_id', '=', $user->id)->orderBy('created_at', 'DESC')->get();
+        
+        foreach ($borrowings as $borrowing) {
+            $borrowing->fine = $this->calculateFine($borrowing);
+            $borrowing->save();
+        }
 
         return view('profile.borrowings', [
             'borrowings' => $borrowings
@@ -142,5 +148,18 @@ class ProfileController extends Controller
         return view('profile.borrowing-detail', [
             'borrowing' => $borrowing,
         ]);
+    }
+
+    public function calculateFine($borrowing)
+    {
+        $today = Carbon::today();
+        $shouldReturnAt = Carbon::parse($borrowing->should_return_at);
+
+        if ($today->greaterThan($shouldReturnAt)) {
+            $daysLate = $today->diffInDays($shouldReturnAt);
+            return $daysLate * 5000;
+        }
+
+        return 0;
     }
 }

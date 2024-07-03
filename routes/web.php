@@ -43,7 +43,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->nam
 Route::get('/home/book-detail/{book}', [HomeController::class, 'bookDetail'])->middleware(['auth', 'role:member'])->name('home.bookDetail');
 
 Route::get('/page/attendance-scanner', [PageController::class, 'attendanceScanner'])->middleware(['auth', 'permission:access-scanner.attendances'])->name('page.attendance-scanner');
-Route::get('/page/attendance-qr', [PageController::class, 'attendanceQR'])->middleware(['auth', 'permission:fill.attendances'])->name('page.attendance-qr');
+Route::get('/page/survey', [PageController::class, 'survey'])->middleware(['auth', 'permission:fill.attendances'])->name('page.survey');
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(['auth'])->name('profile.index');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware(['auth'])->name('profile.edit');

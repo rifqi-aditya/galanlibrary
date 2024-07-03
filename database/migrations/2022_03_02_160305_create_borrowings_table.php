@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Book::class);
             $table->integer('number_of_books', false, true);
             $table->date('should_return_at');
+            $table->integer('fine')->nullable();
             $table->date('return_date')->nullable();
             $table->string('return_status')->nullable();
             $table->timestamps();

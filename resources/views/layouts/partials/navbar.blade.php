@@ -14,7 +14,7 @@
                 <ul class="navbar-nav">
                     @can('fill.attendances')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('page.attendance-qr') }}">Survey Kepuasan</a>
+                            <a class="nav-link" href="{{ route('page.survey') }}">Survey Kepuasan</a>
                         </li>
                     @endcan
                     @can('access-scanner.attendances')
