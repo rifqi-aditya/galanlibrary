@@ -52,7 +52,7 @@ class BookController extends Controller
             'author' => ['required', 'string', 'max:120'],
             'publisher_id' => ['required', 'numeric'],
             'publication_year' => ['required', 'date_format:Y'],
-            'stock' => ['required', 'numeric', 'min:1'],
+            'stock' => ['required', 'numeric', 'min:0'],
             'category_id' => ['required', 'numeric'],
             'cover' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ])->validate();
@@ -124,7 +124,7 @@ class BookController extends Controller
             'author' => ['required', 'string', 'max:120'],
             'publisher_id' => ['required', 'numeric'],
             'publication_year' => ['required', 'date_format:Y'],
-            'stock' => ['required', 'numeric', 'min:1'],
+            'stock' => ['required', 'numeric', 'min:0'],
             'category_id' => ['required', 'numeric'],
             'cover' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ])->validate();

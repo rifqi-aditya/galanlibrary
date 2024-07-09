@@ -13,6 +13,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -112,5 +113,5 @@ Route::get('/reports', [ReportController::class, 'index'])->middleware(['auth', 
 Route::get('/reports/borrowings', [ReportController::class, 'borrowings'])->middleware(['auth', 'permission:create.reports'])->name('report.borrowings');
 Route::get('/reports/attendances', [ReportController::class, 'attendances'])->middleware(['auth', 'permission:create.reports'])->name('report.attendances');
 
-// TODO: Wishlist
-// Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::get('/wishlists', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::put('/wishlists/{book}/add-or-remove', [WishlistController::class, 'addOrRemove'])->name('wishlist.add-or-remove');

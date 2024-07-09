@@ -111,10 +111,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function bookDetail(Request $request, Book $book)
+    public function bookDetail(Book $book)
     {
+        $isAddedToWishlist = $book->wishlists()->where('user_id', auth('web')->id())->exists();
+        
         return view('home.book-detail', [
-            'book' => $book
+            'book' => $book,
+            'isAddedToWishlist' => $isAddedToWishlist,
         ]);
     }
 }
