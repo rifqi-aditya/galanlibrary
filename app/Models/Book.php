@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class Book extends Model
@@ -50,8 +51,13 @@ class Book extends Model
     public function cover()
     {
         if (is_null($this->cover)) {
-            return 'https://source.unsplash.com/random';
+            return 'https://placehold.co/400x300';
         }
         return route('book-covers', ['path' => $this->cover]);
+    }
+
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

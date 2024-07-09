@@ -13,65 +13,11 @@
         @yield('title', 'E-Perpus')
     </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
-    <style>
-        .love-checkbox {
-            display: none;
-        }
 
-        .love-label {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            position: relative;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .love-label::before,
-        .love-label::after {
-            content: "";
-            width: 25px;
-            height: 40px;
-            background: #ccc;
-            position: absolute;
-            border-radius: 25px 25px 0 0;
-            transition: all 0.3s ease;
-        }
-
-        .love-label::before {
-            left: 25px;
-            top: 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .love-label::after {
-            left: 0;
-            top: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        .love-checkbox:checked + .love-label::before,
-        .love-checkbox:checked + .love-label::after {
-            background: red;
-        }
-
-        .love-checkbox:checked + .love-label {
-            animation: heartbeat 0.5s ease-in-out;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-    </style>
 <body class="nunito">
     @include('layouts.partials.navbar')
     <main class="container col-lg-8 py-lg-5 py-3">

@@ -3,7 +3,7 @@
 @section('main')
     <h3 class="mb-4">Detail Buku</h3>
     <div class="mb-3">
-        <button type="button" onclick='window.history.back()' class="btn btn-sm btn-dark">Kembali</button>
+        <a href="{{route('home.index')}}" class="btn btn-sm btn-dark">Kembali</a>
         @can('update.books')
             <a href="{{ route('book.edit', ['book' => $book]) }}" class="btn btn-sm btn-dark">Edit</a>
         @endcan
@@ -43,11 +43,25 @@
         <div class="col-lg-4 mb-3">
             <h5>Sampul</h5>
             <img src="{{ $book->cover() }}" class="img-fluid w-100">
-            <div>
-            <input type="checkbox" id="love" class="love-checkbox">
-            <label for="love" class="love-label"></label>
+            <div class="mt-3">
+                {{-- <input type="checkbox" id="love" class="love-checkbox">
+                <label for="love" class="love-label"></label> --}}
+                <form action="{{ route('wishlist.add-or-remove', ['book' => $book]) }}" method="post">
+                    @csrf
+                    @method('put')
+                    @if ($isAddedToWishlist)
+                        <button type="submit" class="d-flex align-items-center btn p-0" style="cursor: pointer;">
+                            <span class="material-symbols-outlined fs-2 me-2 text-danger">
+                                heart_check
+                            </span> Remove from Wishlist</button>
+                    @else
+                        <button type="submit" class="d-flex align-items-center btn p-0" style="cursor: pointer;">
+                            <span class="material-symbols-outlined fs-2 me-2 text-secondary">
+                                favorite
+                            </span> Add to Wishlist</button>
+                    @endif
+                </form>
             </div>
-            <div>Add to Wishlist</div>
         </div>
     </div>
 @endsection
