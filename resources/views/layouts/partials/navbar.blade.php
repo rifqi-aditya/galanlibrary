@@ -1,9 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top" style="background-color: whitesmoke; border-bottom: 2px grey solid;">
     <div class="container col-lg-8">
         @auth
-            <a class="navbar-brand" href="{{ route('home.index') }}">Aksara Library</a>
+            <a class="navbar-brand" href="{{ route('home.index') }}">Galan Library</a>
         @else
-            <a class="navbar-brand" href="/">Aksara Library</a>
+            {{-- <a class="navbar-brand" href="/">Galan Library</a> --}}
+            <div class="d-flex flex-row align-items-center justify-content-center">
+                <a href="/"><img src="{{ asset('logo.png') }}" alt="Book Illustration" width='50px'></a>
+                <p class="text-black mb-0 ms-3">Galan Library</p>
+            </div>
+
         @endauth
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +31,7 @@
             @endauth
             <ul class="navbar-nav ms-auto">
                 @auth
-    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,6 +52,12 @@
                         </ul>
                     </li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
