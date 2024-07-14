@@ -7,8 +7,8 @@
     <form action="" method="get">
         <div class="row">
             <div class="col-lg-4 mb-3">
-                <input placeholder="Cari berdasarkan judul atau penulis..." type="search" name="search"
-                    class="form-control" value="{{ request()->query('search') }}">
+                <input placeholder="Cari berdasarkan judul atau penulis..." type="search" name="search" class="form-control"
+                    value="{{ request()->query('search') }}">
             </div>
             <div class="col-lg-4 mb-3">
                 <select name="category" class="form-control">

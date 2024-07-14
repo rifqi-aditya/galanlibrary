@@ -37,7 +37,7 @@
             <div class="col-lg-6">
                 <div class="mb-3">
                     <label for="stock" class="form-label">Jumlah Buku</label>
-                    <input type="number" min="1" class="form-control" name="stock" id="stock"
+                    <input type="number" min="0" class="form-control" name="stock" id="stock"
                         value="{{ old('stock') }}">
                 </div>
             </div>
