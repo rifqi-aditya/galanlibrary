@@ -159,7 +159,7 @@ class ProfileController extends Controller
 
         if ($today->greaterThan($shouldReturnAt)) {
             $daysLate = $today->diffInDays($shouldReturnAt);
-            return $daysLate * 5000;
+            return $daysLate * 2000;
         }
 
         return 0;

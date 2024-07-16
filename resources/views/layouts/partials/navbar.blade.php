@@ -17,11 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             @auth
                 <ul class="navbar-nav">
-                    @can('fill.attendances')
-                        <li class="nav-item">
-                            <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
-                        </li>
-                    @endcan
+                    @if(!auth()->user()->hasRole('administrator'))
+                        @can('fill.attendances')
+                            <li class="nav-item">
+                                <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
+                            </li>
+                        @endcan
+                    @endif
                     {{-- @can('access-scanner.attendances')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('page.attendance-scanner') }}">Scan QR Kehadiran</a>
