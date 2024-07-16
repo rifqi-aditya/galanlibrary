@@ -31,13 +31,15 @@
             @endauth
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link flex items-center" href="{{ route('wishlist.index') }}">
-                            <span class="material-symbols-outlined fs-2 me-2 text-grey">
-                                favorite
-                            </span>
-                        </a>
-                    </li>
+                    @if(!auth()->user()->hasRole('administrator'))
+                        <li class="nav-item">
+                            <a class="nav-link flex items-center" href="{{ route('wishlist.index') }}">
+                                <span class="material-symbols-outlined fs-2 me-2 text-grey">
+                                    favorite
+                                </span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

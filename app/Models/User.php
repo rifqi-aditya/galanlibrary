@@ -29,7 +29,7 @@ class User extends Authenticatable
         'email',
         'password',
         'address',
-        'date_of_bird',
+        'date_of_birth',
         'picture',
         'attendance_token',
     ];
@@ -51,7 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'date_of_bird' => 'date:Y-m-d',
+        'date_of_birth' => 'date:Y-m-d',
     ];
 
     public static function booted()
@@ -61,10 +61,6 @@ class User extends Authenticatable
             if ($user->picture) {
                 Storage::delete(self::PICTURE_PATH . '/' . $user->picture);
             }
-        });
-
-        static::creating(function ($user) {
-            $user->username = uniqid();
         });
 
         static::created(function ($user) {

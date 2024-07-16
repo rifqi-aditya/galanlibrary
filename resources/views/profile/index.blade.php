@@ -15,43 +15,51 @@
         </div>
         <div class="col-lg-10 mb-3">
             <table class="table table-borderless">
-                <tr>
-                    <td>Nomor Induk Siswa</td>
-                    <td>
-                        <input type="text" class="form-control" disabled value="{{ $user->username }}">
-                    </td>
-                </tr>
+                @if(!auth()->user()->hasRole('administrator'))
+                    <tr>
+                        <td>Nomor Induk Siswa</td>
+                        <td>
+                            <input type="text" class="form-control" disabled value="{{ $user->username }}">
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td>Nama</td>
                     <td>
                         <input type="text" class="form-control" disabled value="{{ $user->name }}">
                     </td>
                 </tr>
-                <tr>
-                    <td>Tanggal Lahir</td>
-                    <td>
-                        <input type="text" class="form-control" disabled
-                            value="{{ '' ?? $user->date_of_bird->format('d F Y') }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td>
-                        <textarea class="form-control" disabled rows="3">{{ $user->address }}</textarea>
-                    </td>
-                </tr>
+                @if(!auth()->user()->hasRole('administrator'))
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>
+                            <input type="text" class="form-control" disabled
+                            value="{{ isset($user->date_of_birth) ? $user->date_of_birth->format('d F Y') : '' }}">
+                        </td>
+                    </tr>
+                @endif
+                @if(!auth()->user()->hasRole('administrator'))
+                    <tr>
+                        <td>Alamat</td>
+                        <td>
+                            <textarea class="form-control" disabled rows="3">{{ $user->address }}</textarea>
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td>Email</td>
                     <td>
                         <input type="email" class="form-control" disabled value="{{ $user->email }}">
                     </td>
                 </tr>
-                <tr>
-                    <td>Nomor Handphone</td>
-                    <td>
-                        <input type="text" class="form-control" disabled value="{{ $user->NoHandphone }}">
-                    </td>
-                </tr>
+                @if(!auth()->user()->hasRole('administrator'))
+                    <tr>
+                        <td>Nomor Handphone</td>
+                        <td>
+                            <input type="text" class="form-control" disabled value="{{ $user->NoHandphone }}">
+                        </td>
+                    </tr>
+                @endif
             </table>
             <div class="text-end">
                 <a href="{{ route('profile.changePassword') }}" class="btn btn-dark btn-sm">Ubah Password</a>

@@ -35,7 +35,7 @@
                     <td>Tanggal Lahir</td>
                     <td>
                         <input type="text" class="form-control" disabled
-                            value="{{ '' ?? $user->date_of_bird->format('d F Y') }}">
+                            value="{{ '' ?? $user->date_of_birth->format('d F Y') }}">
                     </td>
                 </tr>
                 <tr>
