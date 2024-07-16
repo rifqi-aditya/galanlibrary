@@ -17,11 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             @auth
                 <ul class="navbar-nav">
-                    @can('fill.attendances')
-                        <li class="nav-item">
-                            <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
-                        </li>
-                    @endcan
+                    @if(!auth()->user()->hasRole('administrator'))
+                        @can('fill.attendances')
+                            <li class="nav-item">
+                                <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
+                            </li>
+                        @endcan
+                    @endif
                     {{-- @can('access-scanner.attendances')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('page.attendance-scanner') }}">Scan QR Kehadiran</a>
@@ -31,13 +33,15 @@
             @endauth
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link flex items-center" href="{{ route('wishlist.index') }}">
-                            <span class="material-symbols-outlined fs-2 me-2 text-grey">
-                                favorite
-                            </span>
-                        </a>
-                    </li>
+                    @if(!auth()->user()->hasRole('administrator'))
+                        <li class="nav-item">
+                            <a class="nav-link flex items-center" href="{{ route('wishlist.index') }}">
+                                <span class="material-symbols-outlined fs-2 me-2 text-grey">
+                                    favorite
+                                </span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

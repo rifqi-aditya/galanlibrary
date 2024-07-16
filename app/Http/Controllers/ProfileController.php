@@ -17,7 +17,7 @@ class ProfileController extends Controller
     use PasswordValidationRules;
 
     public function index()
-    {
+    {   
         return view('profile.index', [
             'user' => auth()->user()
         ]);
@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'date_of_bird' => ['required', 'date'],
+            'date_of_birth' => ['required', 'date'],
             'address' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
         $user->forceFill([
             'name' => $input['name'],
-            'date_of_bird' => $input['date_of_bird'],
+            'date_of_birth' => $input['date_of_birth'],
             'address' => $input['address'],
             'email' => $input['email'],
             'noHandphone' => $input['noHandphone']
@@ -159,7 +159,7 @@ class ProfileController extends Controller
 
         if ($today->greaterThan($shouldReturnAt)) {
             $daysLate = $today->diffInDays($shouldReturnAt);
-            return $daysLate * 5000;
+            return $daysLate * 2000;
         }
 
         return 0;

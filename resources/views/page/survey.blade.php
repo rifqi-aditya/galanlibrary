@@ -35,20 +35,15 @@
         let qrWrapper = document.getElementById('qr-wrapper');
 
         confirmButton.addEventListener('click', () => {
-        qrWrapper.style.display = 'block';
-        $.ajax({
-            type: "get",
-            url: "{{ route('attendance.qr') }}",
-            data: [],
-            dataType: "json",
-            success: function(response) {
-            qrWrapper.innerHTML = response.qr;
-            document.querySelector('#qr-wrapper svg').setAttribute('width', '100%');
-            document.querySelector('#qr-wrapper svg').setAttribute('height', '100%');
-            }
-        });
-        confirmButtonWrapper.style.display = 'none'; // Hide confirm button wrapper after click
-});
+            qrWrapper.style.display = 'block';
 
+            // Simpan URL gambar yang akan ditampilkan
+            let imageUrl = "{{ asset('qrsurvey.png') }}";
+
+            // Ganti innerHTML qrWrapper dengan tag img
+            qrWrapper.innerHTML = `<img src="${imageUrl}" style="width: 100%; height: auto;">`;
+
+            confirmButtonWrapper.style.display = 'none'; // Sembunyikan wrapper tombol konfirmasi setelah diklik
+        });
     </script>
 @endsection

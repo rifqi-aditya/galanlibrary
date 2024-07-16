@@ -26,9 +26,9 @@
                     <tr>
                         <td>Tanggal Lahir</td>
                         <td>
-                            <input name="date_of_bird" type="date" class="form-control"
-                                value="{{ old('date_of_bird', $user->date_of_bird) }}">
-                                {{-- value="{{ old('date_of_bird', '' ?? $user->date_of_bird->format('Y-m-d')) }}"> --}}
+                            <input name="date_of_birth" type="date" class="form-control"
+                                value="{{ old('date_of_birth', $user->date_of_birth) }}">
+                                {{-- value="{{ old('date_of_birth', '' ?? $user->date_of_birth->format('Y-m-d')) }}"> --}}
                         </td>
                     </tr>
                     <tr>

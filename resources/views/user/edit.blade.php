@@ -12,9 +12,9 @@
                     <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $user->name) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="date_of_bird" class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="date_of_bird" id="date_of_bird" class="form-control"
-                        value="{{ old('date_of_bird', $user->date_of_bird ? $user->date_of_bird->format('Y-m-d') : '') }}">
+                    <label for="date_of_birth" class="form-label">Tanggal Lahir</label>
+                    <input type="date" name="date_of_birth" id="date_of_birth" class="form-control"
+                        value="{{ old('date_of_birth', $user->date_of_birth ? $user->date_of_birth->format('Y-m-d') : '') }}">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat</label>

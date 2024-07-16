@@ -35,7 +35,7 @@ class UserController extends Controller
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'date_of_bird' => ['required', 'date'],
+            'date_of_birth' => ['required', 'date'],
             'address' => ['required', 'string', 'max:255'],
             'picture' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'email' => [
@@ -57,7 +57,7 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $input['name'],
-            'date_of_bird' => $input['date_of_bird'],
+            'date_of_birth' => $input['date_of_birth'],
             'address' => $input['address'],
             'picture' => $picture,
             'email' => $input['email'],
@@ -98,7 +98,7 @@ class UserController extends Controller
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'date_of_bird' => ['required', 'date'],
+            'date_of_birth' => ['required', 'date'],
             'address' => ['required', 'string', 'max:255'],
             'picture' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'email' => [
@@ -140,7 +140,7 @@ class UserController extends Controller
 
         $user->forceFill([
             'name' => $input['name'],
-            'date_of_bird' => $input['date_of_bird'],
+            'date_of_birth' => $input['date_of_birth'],
             'address' => $input['address'],
             'picture' => $picture,
             'email' => $input['email'],

@@ -11,9 +11,9 @@
                     <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                 </div>
                 <div class="mb-3">
-                    <label for="date_of_bird" class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="date_of_bird" id="date_of_bird" class="form-control"
-                        value="{{ old('date_of_bird') }}">
+                    <label for="date_of_birth" class="form-label">Tanggal Lahir</label>
+                    <input type="date" name="date_of_birth" id="date_of_birth" class="form-control"
+                        value="{{ old('date_of_birth') }}">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat</label>
