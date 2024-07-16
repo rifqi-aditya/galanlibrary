@@ -18,7 +18,8 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-        .love-label {
+        <style>
+            .love-label {
             display: inline-block;
             width: 50px;
             height: 50px;
@@ -84,7 +85,24 @@
         height: 100%;
         }
         }
-    </style>
+        .nav-link-2 {
+         color: grey; /* Warna abu-abu muda saat tidak di-hover */
+         text-decoration: none; /* Menghapus garis bawah jika diinginkan */
+        }
+
+        .nav-link-2:hover {
+        color: black; /* Warna hitam saat di-hover */
+        }
+
+        .material-symbols-outlined {
+        color: gray; /* Warna abu-abu saat tidak di-hover */
+        }
+
+        .material-symbols-outlined:hover {
+        color: red; /* Warna merah saat di-hover */
+        }
+
+        </style>
 <body class="nunito">
     @include('layouts.partials.navbar')
     <main class="container col-lg-8 py-lg-5 py-3">

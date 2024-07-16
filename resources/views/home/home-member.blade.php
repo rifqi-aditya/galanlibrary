@@ -1,10 +1,23 @@
 @extends('layouts.main')
 
 @section('main')
-    <h2 class="text-center">Halo, {{ $user->name }}</h2>
-    <h3 class="text-center mb-4">Mau baca buku apa hari ini?</h3>
+<section class="position-relative py-lg-5 py-3" style="background-image: url('{{ asset('libraryy.jpg') }}'); background-size: cover; background-position: center; height: 250px;">
+    <!-- Overlay untuk membuat gambar lebih gelap -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
 
-    <form action="" method="get">
+    <div class="position-relative row h-100">
+        <div class="col-lg-6 mb-3 d-lg-flex align-items-center order-lg-1 order-2">
+            <div class="d-flex flex-column justify-content-center align-items-center p-10" style="height: 150px; padding-left: 10px;">
+                <h2 class="text-white" style="padding: 15px 10px 15px 10px;">Halo, {{ $user->name }}</h2>
+                <h3 class="text-white fs-4">Mau baca buku apa hari ini?</h3>
+              </div>
+        </div>
+    </div>
+</section>
+    {{-- <h2 class="bg-white text-black" style="padding: 15px 10px 15px 10px;">Halo, {{ $user->name }}</h2>
+    <h3 class="text-white fs-4">Mau baca buku apa hari ini?</h3> --}}
+
+    <form action="" method="get" style="margin-top: 20px;">
         <div class="row">
             <div class="col-lg-4 mb-3">
                 <input placeholder="Cari berdasarkan judul atau penulis..." type="search" name="search" class="form-control"

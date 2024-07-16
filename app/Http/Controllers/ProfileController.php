@@ -46,6 +46,7 @@ class ProfileController extends Controller
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
+            'noHandphone' => ['required', 'string', 'max:30']
         ])->validate();
 
         $user->forceFill([
@@ -53,6 +54,7 @@ class ProfileController extends Controller
             'date_of_bird' => $input['date_of_bird'],
             'address' => $input['address'],
             'email' => $input['email'],
+            'noHandphone' => $input['noHandphone']
         ])->save();
 
         return to_route('profile.index')->with('success', 'Profil berhasil diperbarui');
@@ -130,7 +132,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $borrowings = Borrowing::with(['book'])->where('user_id', '=', $user->id)->orderBy('created_at', 'DESC')->get();
-        
+
         foreach ($borrowings as $borrowing) {
             $borrowing->fine = $this->calculateFine($borrowing);
             $borrowing->save();

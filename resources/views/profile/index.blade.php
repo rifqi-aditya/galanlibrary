@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
+    {{-- @dd($user) --}}
     <h3 class="mb-4">Profil Saya</h3>
     <div class="row">
         <div class="col-lg-2 mb-3">
@@ -15,7 +16,7 @@
         <div class="col-lg-10 mb-3">
             <table class="table table-borderless">
                 <tr>
-                    <td>Identifier</td>
+                    <td>Nomor Induk Siswa</td>
                     <td>
                         <input type="text" class="form-control" disabled value="{{ $user->username }}">
                     </td>
@@ -43,6 +44,12 @@
                     <td>Email</td>
                     <td>
                         <input type="email" class="form-control" disabled value="{{ $user->email }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nomor Handphone</td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="{{ $user->NoHandphone }}">
                     </td>
                 </tr>
             </table>

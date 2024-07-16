@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg sticky-top" style="background-color: whitesmoke; border-bottom: 2px grey solid;">
     <div class="container col-lg-8">
         @auth
-            <a class="navbar-brand" href="{{ route('home.index') }}">Galan Library</a>
+            <a class="navbar-brand text-black" style="font-weight: bold;" href="{{ route('home.index') }}">Galan Library</a>
         @else
             {{-- <a class="navbar-brand" href="/">Galan Library</a> --}}
             <div class="d-flex flex-row align-items-center justify-content-center">
                 <a href="/"><img src="{{ asset('logo.png') }}" alt="Book Illustration" width='50px'></a>
-                <p class="text-black mb-0 ms-3">Galan Library</p>
+                <p class="text-black mb-0 ms-3" style="font-weight: bold; font-size: 24px;">Galan Library</p>
             </div>
 
         @endauth
@@ -19,21 +19,21 @@
                 <ul class="navbar-nav">
                     @can('fill.attendances')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('page.survey') }}">Survey Kepuasan</a>
+                            <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
                         </li>
                     @endcan
-                    @can('access-scanner.attendances')
+                    {{-- @can('access-scanner.attendances')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('page.attendance-scanner') }}">Scan QR Kehadiran</a>
                         </li>
-                    @endcan
+                    @endcan --}}
                 </ul>
             @endauth
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item">
                         <a class="nav-link flex items-center" href="{{ route('wishlist.index') }}">
-                            <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined fs-2 me-2 text-grey">
                                 favorite
                             </span>
                         </a>
@@ -59,13 +59,13 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Beranda</a>
+                        <a class="nav-link" href="/" style="color: gray;">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Profile</a>
+                        <a class="nav-link" href="#Profile-Sekolah" style="color: gray;">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}" style="color: gray;">Login</a>
                     </li>
                 @endauth
             </ul>

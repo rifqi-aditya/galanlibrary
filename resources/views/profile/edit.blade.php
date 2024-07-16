@@ -12,7 +12,7 @@
                 @method('put')
                 <table class="table table-borderless">
                     <tr>
-                        <td>Identifier</td>
+                        <td>Nomor Induk Siswa</td>
                         <td>
                             <input type="text" class="form-control" disabled value="{{ $user->username }}">
                         </td>
@@ -27,7 +27,8 @@
                         <td>Tanggal Lahir</td>
                         <td>
                             <input name="date_of_bird" type="date" class="form-control"
-                                value="{{ old('date_of_bird', '' ?? $user->date_of_bird->format('Y-m-d')) }}">
+                                value="{{ old('date_of_bird', $user->date_of_bird) }}">
+                                {{-- value="{{ old('date_of_bird', '' ?? $user->date_of_bird->format('Y-m-d')) }}"> --}}
                         </td>
                     </tr>
                     <tr>
@@ -42,6 +43,13 @@
                         <td>
                             <input name="email" type="email" class="form-control"
                                 value="{{ old('email', $user->email) }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Handphone</td>
+                        <td>
+                            <input name="noHandphone" type="text" class="form-control"
+                                value="{{ old('NoHandphone', $user->NoHandphone) }}">
                         </td>
                     </tr>
                 </table>

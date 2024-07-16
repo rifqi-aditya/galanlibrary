@@ -4,17 +4,14 @@
     <div class="row">
         <div class="col-lg-7 mx-auto" id="qr">
         <div class="text-center">
-        <h1>Survei Kepuasan Member</h1>
+        <h2 style="font-weight: bold; font-size: 24px;">SURVEI KEPUASAN MEMBER</h2>
         </div>
         <br>
         </br>
-            <div class="text-justify">
-                
-                <p>Kami mohon kesediaan waktu Anda untuk mengisi survei Kepuasaan Member terhadap layanan Aksara Library. </p>
-                <p>Penilaian Anda sangat berarti bagi kami untuk meningkatkan kualitas dan pelayanan kami.</p>
-                    <p>
-                    Klik tombol <strong>Konfirmasi</strong> untuk menampilkan QR Code dan memulai survei kepuasan member.
-                    </p>
+            <div class="text-center">
+                <p>Terima kasih telah menjadi member kami!</p>
+                    <p>Kami sangat menghargai waktu Anda untuk mengisi survei ini. Jawaban Anda akan membantu kami meningkatkan layanan kami </p>
+                <p> Klik tombol <strong>Konfirmasi</strong> untuk menampilkan QR Code dan memulai survei kepuasan member</p>
             </div>
         </div>
     </div>

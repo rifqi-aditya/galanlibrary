@@ -1,13 +1,25 @@
 @extends('layouts.main')
 
 @section('main')
-    <h2 class="text-center">Wishlist Book</h2>
+    <section class="position-relative py-lg-5 py-3" style="background-image: url('{{ asset('libraryy.jpg') }}'); background-size: cover; background-position: center; height: 250px;">
+        <!-- Overlay untuk membuat gambar lebih gelap -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+
+        <div class="position-relative row h-100">
+            <div class="col-lg-6 mb-3 d-lg-flex align-items-center order-lg-1 order-2">
+                <div class="d-flex flex-column justify-content-center align-items-center p-10" style="height: 150px; padding-left: 10px;">
+                    <h2 class="text-center text-white">Wishlist Book</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- <h2 class="text-center">Wishlist Book</h2> --}}
     <div class="row mt-5 d-flex justify-content-center">
         @forelse($wishlists as $wishlist)
             <div class="col-lg-4 mb-3">
                 <div class="card h-100 rounded-lg shadow-sm">
                     <div class="card-body">
-                        <img src="{{ $wishlist->book->cover() }}" class="w-100 img-fluid rounded-lg mb-2">
+                        <img src="{{ $wishlist->book->cover}}" class="w-100 img-fluid rounded-lg mb-2">
                         <div class="mb-2">
                             <span class="badge bg-primary">{{ $wishlist->book->category->name }}</span>
                         </div>

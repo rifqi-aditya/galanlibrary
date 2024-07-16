@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Detail Buku</h3>
+    <h3 class="mb-4"  style="font-weight: bold; font-size: 24px;">Detail Buku</h3>
     <div class="mb-3">
         <a href="{{route('home.index')}}" class="btn btn-sm btn-dark">Kembali</a>
         @can('update.books')
