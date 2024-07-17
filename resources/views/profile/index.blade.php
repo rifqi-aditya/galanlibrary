@@ -19,7 +19,7 @@
                     <tr>
                         <td>Nomor Induk Siswa</td>
                         <td>
-                            <input type="text" class="form-control" disabled value="{{ $user->username }}">
+                            <input type="text" class="form-control" disabled value="{{ $user->nis }}">
                         </td>
                     </tr>
                 @endif

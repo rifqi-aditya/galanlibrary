@@ -74,6 +74,8 @@ class DatabaseSeeder extends Seeder
                 'delete.borrowings',
                 'read.statistics',
                 'create.reports',
+            ],
+            'member' => [
             ]
         ];
 

@@ -27,7 +27,7 @@
         <div class="col-lg-9 mb-3">
             <h5>Nama Peminjam</h5>
             <p>
-                {{ $borrowing->user->name }} -- {{ $borrowing->user->username }}
+                {{ $borrowing->user->name }} -- {{ $borrowing->user->nis }}
                 <br>
                 <a href="{{ route('borrowing.showByUser', ['user' => $borrowing->user]) }}">Lihat semua semua peminjaman
                     oleh {{ $borrowing->user->name }}</a>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Peminjaman Buku Oleh {{ $user->name }} -- {{ $user->username }}</h3>
+    <h3 class="mb-4">Peminjaman Buku Oleh {{ $user->name }} -- {{ $user->nis }}</h3>
     <div class="mb-3">
         <a href="{{ route('borrowing.index') }}" class="btn btn-sm btn-dark">Kembali</a>
     </div>
