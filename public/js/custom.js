@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         ]
     })
-
-    new DataTable('#attendance-table')
     new DataTable('#category-table', {
         columnDefs: [
             {

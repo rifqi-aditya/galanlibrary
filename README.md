@@ -3,8 +3,7 @@
 Features:
 - Book management with category, bookshelf, and publisher data.
 - Administrator, Staff, and Member role.
-- Book borrowing system.
-- QR code based attendance system.
+- Book borrowing system
 - Various report data for monitoring.
 
 Install:

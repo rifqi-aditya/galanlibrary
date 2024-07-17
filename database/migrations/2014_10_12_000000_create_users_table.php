@@ -23,7 +23,6 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->text('address')->nullable();
             $table->string('picture')->nullable();
-            $table->text('attendance_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

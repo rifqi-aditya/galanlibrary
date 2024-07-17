@@ -18,8 +18,8 @@
     <div class="row">
         <div class="col-lg-4 mx-auto">
             <div class="text-center">
-                <div class="text-center" id="confirm-attendance-wrapper">
-                    <button id="confirm-attendance" class="btn btn-sm btn-dark">Konfirmasi</button>
+                <div class="text-center" id="confirm-survey-wrapper">
+                    <button id="confirm-survey" class="btn btn-sm btn-dark">Konfirmasi</button>
                 </div>
                 <div id='progressbar' style="display: none"></div>
                 <div style="display: none" class="text-center" id="qr-wrapper"></div>
@@ -30,8 +30,8 @@
 
 @section('script')
     <script>
-        let confirmButton = document.getElementById('confirm-attendance');
-        let confirmButtonWrapper = document.getElementById('confirm-attendance-wrapper');
+        let confirmButton = document.getElementById('confirm-survey');
+        let confirmButtonWrapper = document.getElementById('confirm-survey-wrapper');
         let qrWrapper = document.getElementById('qr-wrapper');
 
         confirmButton.addEventListener('click', () => {
