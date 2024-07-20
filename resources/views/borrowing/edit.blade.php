@@ -11,7 +11,7 @@
             <select name="user_id" id="user_id" class="form-control select2">
                 @foreach ($users as $user)
                     <option {{ old('user_id', $borrowing->user_id) == $user->id ? 'selected' : '' }}
-                        value="{{ $user->id }}">{{ $user->name }} -- {{ $user->username }}</option>
+                        value="{{ $user->id }}">{{ $user->name }} -- {{ $user->nis }}</option>
                 @endforeach
             </select>
         </div>

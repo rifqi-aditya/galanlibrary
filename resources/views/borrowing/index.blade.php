@@ -35,8 +35,9 @@
                         <td>{{ $activeBorrowing->should_return_at->format('d F Y') }}</td>
                         @if ($activeBorrowing->fine != null)
                             <td>Rp. {{ sprintf('%s,00', number_format($activeBorrowing->fine, 0, ',', '.')) }}</td>
+                        @else
+                            <td class="text-center">-</td>
                         @endif
-                        <td class="text-center">-</td>
                         <td class="text-center">
                             <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
                                 class="link-primary material-icons text-decoration-none">

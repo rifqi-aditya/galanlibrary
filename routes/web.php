@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RackController;
 use App\Http\Controllers\BorrowingController;
@@ -43,8 +42,7 @@ Route::get('/contents/book-covers/{path}', [ContentController::class, 'bookCover
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home.index');
 Route::get('/home/book-detail/{book}', [HomeController::class, 'bookDetail'])->middleware(['auth', 'role:member'])->name('home.bookDetail');
 
-Route::get('/page/attendance-scanner', [PageController::class, 'attendanceScanner'])->middleware(['auth', 'permission:access-scanner.attendances'])->name('page.attendance-scanner');
-Route::get('/page/survey', [PageController::class, 'survey'])->middleware(['auth', 'permission:fill.attendances'])->name('page.survey');
+Route::get('/page/survey', [PageController::class, 'survey'])->middleware(['auth'])->name('page.survey');
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(['auth'])->name('profile.index');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware(['auth'])->name('profile.edit');
@@ -65,10 +63,6 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('a
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth', 'permission:update.users')->name('user.update');
 Route::get('/users/{user}/delete', [UserController::class, 'delete'])->middleware('auth', 'permission:delete.users')->name('user.delete');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('auth', 'permission:delete.users')->name('user.destroy');
-
-Route::get('/attendances/qr', [AttendanceController::class, 'qr'])->middleware(['auth', 'permission:fill.attendances'])->name('attendance.qr');
-Route::post('/attendances/fill', [AttendanceController::class, 'fill'])->middleware(['auth', 'permission:access-scanner.attendances'])->name('attendance.fill');
-Route::get('/attendances', [AttendanceController::class, 'index'])->middleware(['auth', 'permission:read.attendances'])->name('attendance.index');
 
 Route::get('/categories', [CategoryController::class, 'index'])->middleware(['auth', 'permission:read.categories'])->name('category.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->middleware(['auth', 'permission:create.categories'])->name('category.create');
@@ -111,7 +105,6 @@ Route::delete('/borrowings/{borrowing}', [BorrowingController::class, 'destroy']
 
 Route::get('/reports', [ReportController::class, 'index'])->middleware(['auth', 'permission:create.reports'])->name('report.index');
 Route::get('/reports/borrowings', [ReportController::class, 'borrowings'])->middleware(['auth', 'permission:create.reports'])->name('report.borrowings');
-Route::get('/reports/attendances', [ReportController::class, 'attendances'])->middleware(['auth', 'permission:create.reports'])->name('report.attendances');
 
 Route::get('/wishlists', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::put('/wishlists/{book}/add-or-remove', [WishlistController::class, 'addOrRemove'])->name('wishlist.add-or-remove');

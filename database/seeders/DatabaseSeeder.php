@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attendance;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Publisher;
@@ -29,12 +28,6 @@ class DatabaseSeeder extends Seeder
             'read.users',
             'update.users',
             'delete.users',
-            // attendance
-            'create.attendances',
-            'read.attendances',
-            'delete.attendances',
-            'fill.attendances',
-            'access-scanner.attendances',
             // book categories
             'create.categories',
             'read.categories',
@@ -71,7 +64,6 @@ class DatabaseSeeder extends Seeder
             'staff' => [
                 'read.roles',
                 'read.users',
-                'read.attendances',
                 'read.categories',
                 'read.racks',
                 'read.publishers',
@@ -80,12 +72,10 @@ class DatabaseSeeder extends Seeder
                 'create.borrowings',
                 'update.borrowings',
                 'delete.borrowings',
-                'access-scanner.attendances',
                 'read.statistics',
                 'create.reports',
             ],
             'member' => [
-                'fill.attendances',
             ]
         ];
 

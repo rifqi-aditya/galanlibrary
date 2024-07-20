@@ -35,16 +35,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5>Pengunjung Perpustakaan Bulan Ini</h5>
-                        <div class="google-chart-wrap">
-                            <div id="attendanceChart" class="google-chart-content"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <hr>
     @endcan
@@ -149,26 +139,6 @@
                 </a>
             </div>
         @endcan
-        @can('read.attendances')
-            <div class="col-lg-4 mb-3">
-                <a href="{{ route('attendance.index') }}" class="text-decoration-none">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="d-flex h-100 justify-content-between align-items-center">
-                                <div>
-                                    <span class="material-icons card-icon text-primary">
-                                        receipt_long
-                                    </span>
-                                </div>
-                                <div class="text-end">
-                                    <h5 class="mb-0 text-primary">Daftar Hadir</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        @endcan
         @can('read.users')
             <div class="col-lg-4 mb-3">
                 <a href="{{ route('user.index') }}" class="text-decoration-none">
@@ -239,7 +209,6 @@
             let categoryChartData = JSON.parse('{!! $categoryChartData !!}')
             let bookBorrowingChartData = JSON.parse('{!! $bookBorrowingChartData !!}')
             let borrowingStatusChartData = JSON.parse('{!! $borrowingCountChartData !!}')
-            let thisMonthAttendancesChartData = JSON.parse('{!! $thisMonthAttendancesChartData !!}')
 
             function drawVisualization() {
                 new google.visualization.PieChart(document.getElementById('categoryChart')).draw(
@@ -273,13 +242,6 @@
                             width: "100%"
                         },
                         is3D: true,
-                    })
-
-                new google.visualization.LineChart(document.getElementById('attendanceChart')).draw(
-                    google.visualization.arrayToDataTable(thisMonthAttendancesChartData), {
-                        legend: {
-                            position: 'bottom'
-                        }
                     })
             }
 

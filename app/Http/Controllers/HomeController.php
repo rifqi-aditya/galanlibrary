@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
 use App\Models\Book;
 use App\Models\Borrowing;
 use App\Models\Category;
@@ -53,31 +52,10 @@ class HomeController extends Controller
                 ['Sudah Dikembalikan', $returnedBorrowingCount],
             ];
 
-            $thisMonthAttendances =  Attendance::select(DB::raw('date(created_at) as date'), DB::raw('count(*) as total'))
-                ->whereYear('created_at', Carbon::now()->year)
-                ->whereMonth('created_at', Carbon::now()->month)
-                ->groupBy('date')
-                ->orderBy('date', 'ASC')
-                ->get();
-
-            $thisMonthAttendancesChartData = $thisMonthAttendances->map(function ($attendance) {
-                return [
-                    'Tgl ' . Carbon::createFromFormat('Y-m-d', $attendance->date)->format('d'),
-                    $attendance->total
-                ];
-            })->toArray();
-
-            if ($thisMonthAttendancesChartData == []) {
-                array_push($thisMonthAttendancesChartData, ['', 0]);
-            }
-
-            array_unshift($thisMonthAttendancesChartData, ['Tanggal', 'Pengunjung']);
-
             return view('home.index', [
                 'categoryChartData' => json_encode($categoryChartData),
                 'bookBorrowingChartData' => json_encode($bookBorrowingChartData),
-                'borrowingCountChartData' => json_encode($borrowingCountChartData),
-                'thisMonthAttendancesChartData' => json_encode($thisMonthAttendancesChartData)
+                'borrowingCountChartData' => json_encode($borrowingCountChartData)
             ]);
         }
 

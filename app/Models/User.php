@@ -24,14 +24,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
+        'nis',
         'name',
         'email',
         'password',
         'address',
         'date_of_birth',
         'picture',
-        'attendance_token',
     ];
 
     /**
@@ -99,11 +98,6 @@ class User extends Authenticatable
         $hash = md5($email);
 
         return 'https://www.gravatar.com/avatar/' . $hash . '?s=200';
-    }
-
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
     }
 
     public function borrowings()

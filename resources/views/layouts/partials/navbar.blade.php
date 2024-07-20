@@ -18,17 +18,10 @@
             @auth
                 <ul class="navbar-nav">
                     @if(!auth()->user()->hasRole('administrator'))
-                        @can('fill.attendances')
-                            <li class="nav-item">
-                                <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
-                            </li>
-                        @endcan
-                    @endif
-                    {{-- @can('access-scanner.attendances')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('page.attendance-scanner') }}">Scan QR Kehadiran</a>
+                            <a class="nav-link-2" href="{{ route('page.survey') }}">Survei Kepuasan</a>
                         </li>
-                    @endcan --}}
+                    @endif
                 </ul>
             @endauth
             <ul class="navbar-nav ms-auto">

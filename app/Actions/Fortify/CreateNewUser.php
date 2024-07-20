@@ -29,9 +29,9 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'username' => [
+            'nis' => [
                 'required',
-                'integer',
+                'numeric',
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
@@ -40,7 +40,7 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'username' => $input['username'],
+            'nis' => $input['nis'],
             'password' => Hash::make($input['password']),
         ]);
 

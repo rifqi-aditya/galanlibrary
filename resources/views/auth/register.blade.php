@@ -16,7 +16,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nomor Induk Siswa</label>
-                            <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}">
+                            <input type="text" class="form-control" id="nis" name="nis" value="{{ old('nis') }}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
