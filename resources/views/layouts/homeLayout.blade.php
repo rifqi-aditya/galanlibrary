@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <title>
-        @yield('title', 'Galan Library')
+        @yield('title', 'E-Perpus')
     </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet"
@@ -111,8 +111,8 @@
 <body >
     @include('layouts.partials.navbar')
     <main class=" col-lg-12">
-        @include('layouts.partials.alerts')
-       <div style="min-height: 100vh; padding-top: 50px; padding-left: 50px; padding-right: 50px">
+        {{-- @include('layouts.partials.alerts') --}}
+       <div style="min-height: 100vh">
          @yield('main')
        </div>
     </main>
@@ -127,7 +127,74 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+
+    @if (session('info'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '{!! session('info') !!}',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '{!! session('success') !!}',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
+    @if (session('warning'))
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: '{!! session('warning') !!}',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
+    @if (session('danger'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{!! session('danger') !!}',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
+    @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: '<ul>{!! implode('', $errors->all('<li>:message</li>')) !!}</ul>',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
+    @if (session('status'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Status',
+            text: '{!! session('status') !!}',
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+
     @yield('script')
 </body>
 

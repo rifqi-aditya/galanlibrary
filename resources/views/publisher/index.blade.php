@@ -9,8 +9,8 @@
         @endcan
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered" id="publisher-table">
-            <thead>
+        <table class="table table-striped table-hover table-bordered" id="publisher-table">
+            <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Nama Penerbit</th>
@@ -29,15 +29,15 @@
                         <td>{{ $publisher->name }}</td>
                         <td>{{ $publisher->address }}</td>
                         <td>
-                            <a href="{{ $publisher->website }}">{{ $publisher->website }}</a>
+                            <a href="{{ $publisher->website }}" target="_blank">{{ $publisher->website }}</a>
                         </td>
                         <td>{{ $publisher->books->sum('stock') }}</td>
                         @canany(['update.publishers', 'delete.publishers'])
                             <td nowrap class="text-center">
                                 @can('update.publishers')
                                     <a href="{{ route('publisher.edit', ['publisher' => $publisher]) }}"
-                                        class="link-success material-icons text-decoration-none">
-                                        edit
+                                        class="btn btn-outline-success btn-sm">
+                                        <i class="material-icons">edit</i>
                                     </a>
                                 @endcan
                                 @can('delete.publishers')
@@ -46,8 +46,9 @@
                                         @csrf
                                         @method('delete')
                                         <button onclick="return confirm('Hapus penerbit: {{ $publisher->name }} ?')"
-                                            type="submit"
-                                            class="border-0 bg-transparent material-icons text-decoration-none link-danger">delete_forever</button>
+                                            type="submit" class="btn btn-outline-danger btn-sm">
+                                            <i class="material-icons">delete_forever</i>
+                                        </button>
                                     </form>
                                 @endcan
                             </td>

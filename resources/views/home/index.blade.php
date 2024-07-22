@@ -1,10 +1,11 @@
 @extends('layouts.main')
 
 @section('main')
-    @can('read.statistics')
-        <h4>Statistik Perpustakaan</h4>
+   <div>
+     @can('read.statistics')
+        <h4 >Statistik Perpustakaan</h4>
         <hr>
-        <div class="row mb-5">
+        <div class="row mb-5" style="display: flex ; justify-content: center; margin-top: 70px">
             <div class="col-lg-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -200,6 +201,7 @@
             </div>
         @endcan
     </div>
+   </div>
 @endsection
 
 @section('script')

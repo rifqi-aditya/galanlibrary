@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Edit Rak Buku</h3>
+  <div style="padding-left: 50px;padding-right: 50px;padding-top: 50px;">
+      <h3 class="mb-4">Edit Rak Buku</h3>
     <form action="{{ route('rack.update', ['rack' => $rack]) }}" method="post">
         @csrf
         @method('put')
@@ -49,4 +50,5 @@
             <button type="submit" class="btn btn-dark btn-sm">Simpan</button>
         </div>
     </form>
+  </div>
 @endsection

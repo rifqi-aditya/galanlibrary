@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Tambah Rak Buku</h3>
+    <div>
+        <h3 class="mb-4">Tambah Rak Buku</h3>
     <form action="{{ route('rack.store') }}" method="post">
         @csrf
         <div class="row">
@@ -39,4 +40,5 @@
             <button type="submit" class="btn btn-dark btn-sm">Simpan</button>
         </div>
     </form>
+    </div>
 @endsection

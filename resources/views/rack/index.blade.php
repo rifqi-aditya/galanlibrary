@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Rak Buku</h3>
+   <div >
+     <h3 class="mb-4">Rak Buku</h3>
     <div class="mb-3">
         <a href="{{ route('home.index') }}" class="btn btn-sm btn-dark">Home</a>
         @can('create.racks')
@@ -9,8 +10,8 @@
         @endcan
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered" id="rack-table">
-            <thead>
+        <table class="table table-striped table-hover table-bordered" id="rack-table">
+            <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Kode</th>
@@ -38,8 +39,8 @@
                             <td class="text-center">
                                 @can('update.racks')
                                     <a href="{{ route('rack.edit', ['rack' => $rack]) }}"
-                                        class="link-success material-icons text-decoration-none">
-                                        edit
+                                        class="btn btn-outline-success btn-sm">
+                                        <i class="material-icons">edit</i>
                                     </a>
                                 @endcan
                                 @can('delete.racks')
@@ -48,7 +49,9 @@
                                         @csrf
                                         @method('delete')
                                         <button onclick="return confirm('Hapus rak buku: {{ $rack->code }} ?')" type="submit"
-                                            class="border-0 bg-transparent material-icons text-decoration-none link-danger">delete_forever</button>
+                                            class="btn btn-outline-danger btn-sm">
+                                            <i class="material-icons">delete_forever</i>
+                                        </button>
                                     </form>
                                 @endcan
                             </td>
@@ -58,4 +61,5 @@
             </tbody>
         </table>
     </div>
+   </div>
 @endsection

@@ -1,16 +1,17 @@
 @extends('layouts.main')
 
 @section('main')
-    <h3 class="mb-4">Buku</h3>
+ <div >
+       <h3 class="mb-4">Buku</h3>
     <div class="mb-3">
         <a href="{{ route('home.index') }}" class="btn btn-sm btn-dark">Home</a>
         @can('create.books')
             <a href="{{ route('book.create') }}" class="btn btn-sm btn-dark">Tambah Buku</a>
         @endcan
     </div>
-    <div class="table-responsive">
-        <table class="table table-bordered" id="book-table">
-            <thead>
+    <div class="table-responsive" style="margin-top: 30px; ">
+        <table class="table table-striped table-hover table-bordered" id="book-table">
+            <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Judul</th>
@@ -34,24 +35,28 @@
                         <td>{{ $book->publication_year }}</td>
                         <td>{{ $book->stock }}</td>
                         <td>{{ $book->category->name }}</td>
-                        <td class="text-center">
-                            <a href="{{ route('book.show', ['book' => $book]) }}"
-                                class="link-primary material-icons text-decoration-none">
-                                visibility
-                            </a>
-                            @can('delete.books')
-                                <form action="{{ route('book.destroy', ['book' => $book]) }}" method="post"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button onclick="return confirm('Hapus buku: {{ $book->title }} ?')" type="submit"
-                                        class="p-0 border-0 bg-transparent material-icons text-decoration-none link-danger">delete_forever</button>
-                                </form>
-                            @endcan
-                        </td>
+                        @canany(['update.books', 'delete.books'])
+                            <td class="text-center">
+                                <a href="{{ route('book.show', ['book' => $book]) }}"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                                @can('delete.books')
+                                    <form action="{{ route('book.destroy', ['book' => $book]) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button onclick="return confirm('Hapus buku: {{ $book->title }} ?')" type="submit"
+                                            class="btn btn-outline-danger btn-sm">
+                                            <i class="material-icons">delete_forever</i>
+                                        </button>
+                                    </form>
+                                @endcan
+                            </td>
+                        @endcanany
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+ </div>
 @endsection
