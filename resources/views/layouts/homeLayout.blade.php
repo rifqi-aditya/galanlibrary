@@ -107,6 +107,9 @@
         body{
             font-family: 'Poppins', sans-serif;
         }
+
+
+
     </style>
 <body >
     @include('layouts.partials.navbar')

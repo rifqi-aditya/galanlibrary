@@ -58,7 +58,7 @@
                             <a class="nav-link" href="/" style="color: gray;">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#Profile-Sekolah" style="color: gray;">Profile</a>
+                            <a class="nav-link" href="#Profile-Sekolah" style="color: gray;">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}" style="color: gray;">Login</a>

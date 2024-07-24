@@ -19,16 +19,16 @@
         </div>
     </div>
 {{-- Profile Sekolah --}}
-    <div style="margin-top: 100px;" id="Profile-Sekolah">
+    <div class="pt-5 pb-5" style="background-color: #F6F5F2" id="Profile-Sekolah">
         <div style="display: flex; justify-content: center; align-content: center;">
-            <h1 class="text-center fs-2" style="font-weight: bold;  width: fit-content;">Profile Sekolah</h1>
+            <h1 class="text-center fs-2" style="font-weight: bold;  width: fit-content;">Mengenal Perpustakaan Kami</h1>
         </div>
         <div style="margin-top: 30px;">
           <div style="display: flex; justify-content:center; align-items:center;padding-left: 50px; padding-right: 50px">
-            <div style="width: 50%">
-                <img src="https://sman39jkt.sch.id/wp-content/uploads/2019/09/motto-sman39.jpg" alt="image" style="width: 100%;border-radius: 10px; box-shadow: #000 0px 0px 5px"></div>
-            <div style="width: 50%">
-                <p class="text-center" style="padding-left: 20px;"><span style="font-size: 30px;font-weight: bold">SMAN 39</span> Jakarta terletak di Jl. RA Fadhilah Cijantung, Pasar Rebo, Jakarta Timur, memiliki visi menjadi sekolah unggul dalam prestasi akademik dan non-akademik. Misinya mencakup menciptakan lingkungan belajar kondusif, mengembangkan potensi siswa, dan membangun karakter baik. Sekolah ini didirikan untuk menyediakan pendidikan berkualitas di Jakarta Timur. Fasilitasnya mencakup laboratorium, perpustakaan, dan fasilitas olahraga lengkap. SMAN 39 memiliki berbagai prestasi di tingkat nasional dan internasional, dengan tenaga pendidik yang berpengalaman dan berkualitas.</p>
+            <div style="width:40%; display: flex; justify-content: end; align-items: center ;padding-right: 30px">
+                <img src="https://sman39jkt.sch.id/wp-content/uploads/2012/06/IMG_2064.jpg" alt="image" style="width: 65%;border-radius: 10px; box-shadow: #000 0px 0px 10px"></div>
+            <div style="width: 60%;">
+                <p class="text-center" style="padding-left: 20px;"> <span style="font-size: 25px;font-weight: bold;">Perpustakaan SMA Negeri 39 Jakarta </span>  menyediakan berbagai koleksi buku, jurnal, dan sumber daya digital yang dapat diakses oleh seluruh siswa dan staf pengajar. Kami berkomitmen untuk mendukung kegiatan belajar mengajar dengan menyediakan fasilitas yang lengkap dan nyaman. Selain itu, kami juga menawarkan layanan peminjaman buku, ruang baca yang kondusif, serta akses ke berbagai platform digital untuk memperkaya pengalaman belajar dan penelitian. Dengan demikian, kami berusaha menciptakan lingkungan</p>
             </div>
 
           </div>
