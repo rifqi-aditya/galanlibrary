@@ -29,7 +29,7 @@
 
     <div style="display: flex ; justify-content: center; align-items: center">
         <div style="width: 80%; display: flex; flex-direction: column; justify-content: center; align-items: center">
-            <h1 style="border-bottom: black 5px solid; width: fit-content; margin-bottom: 50px ">Survey Pelanggan</h1>
+            <h1 style="border-bottom: black 5px solid; width: fit-content; margin-bottom: 50px ">Survey Kepuasan Member</h1>
 
             <p style="text-align: center">Terima kasih telah menjadi member kami!</p>
             <p style="text-align: center">Kami sangat menghargai waktu Anda untuk mengisi survei ini. Jawaban Anda akan membantu kami meningkatkan layanan kami </p>

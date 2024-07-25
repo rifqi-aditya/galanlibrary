@@ -7,9 +7,7 @@ use App\Models\Borrowing;
 use App\Models\Category;
 use App\Models\Publisher;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -18,7 +16,7 @@ class HomeController extends Controller
         $user = User::find(auth()->user()->id);
 
         if ($user->hasRole(['administrator', 'staff'])) {
-            $categories = Category::with(['books'])->get();
+            $categories = Category::with(['books'])->get()->paginate(10);
 
             $categoryChartData = $categories->map(function ($category) {
                 return [$category->name, $category->books->sum('stock')];
@@ -89,10 +87,11 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function bookDetail(Book $book)
     {
         $isAddedToWishlist = $book->wishlists()->where('user_id', auth('web')->id())->exists();
-        
+
         return view('home.book-detail', [
             'book' => $book,
             'isAddedToWishlist' => $isAddedToWishlist,

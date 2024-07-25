@@ -3,7 +3,11 @@
         <div class="d-flex justify-content-between w-100">
             <div class="d-flex align-items-center">
                 @auth
-                    <a class="navbar-brand text-black" style="font-weight: bold;" href="{{ route('home.index') }}">Galan Library</a>
+                    <a class="text-black" style="font-weight: bold;text-decoration: none;display: flex; align-items: center" href="{{ route('home.index') }}">
+                        <img src="{{ asset('logo.png') }}" alt="Book Illustration" width='50px'>
+                        <p class="text-black mb-0 ms-3" style="font-weight: bold; font-size: 24px;">Galan Library</p>
+
+                    </a>
                 @else
                     <a href="/"><img src="{{ asset('logo.png') }}" alt="Book Illustration" width='50px'></a>
                     <p class="text-black mb-0 ms-3" style="font-weight: bold; font-size: 24px;">Galan Library</p>

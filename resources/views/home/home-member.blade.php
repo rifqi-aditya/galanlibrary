@@ -50,7 +50,7 @@
             <a href="{{ route('home.index') }}">Bersihkan Pencarian</a>
         </div>
     @endif
-    <div class="row mt-5 d-flex justify-content-center" style="margin-top: 20px;  padding-left: 20px;padding-right: 20px">
+    <div class="row mt-5 d-flex justify-content-center mb-5" style="margin-top: 20px;  padding-left: 20px;padding-right: 20px">
         @forelse($books as $book)
             <div class="col-lg-4 mb-3">
                 <div class="card h-100 rounded-lg shadow-sm">
