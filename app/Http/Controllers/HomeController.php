@@ -16,7 +16,7 @@ class HomeController extends Controller
         $user = User::find(auth()->user()->id);
 
         if ($user->hasRole(['administrator', 'staff'])) {
-            $categories = Category::with(['books'])->get()->paginate(10);
+            $categories = Category::with(['books'])->get();
 
             $categoryChartData = $categories->map(function ($category) {
                 return [$category->name, $category->books->sum('stock')];
