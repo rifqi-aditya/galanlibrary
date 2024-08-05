@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Book::class);
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Book::class)->constrained()->onDelete('cascade');
             $table->integer('number_of_books', false, true);
             $table->date('should_return_at');
             $table->integer('fine')->nullable();
