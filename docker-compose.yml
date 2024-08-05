@@ -75,6 +75,18 @@ services:
             - laravel-elibrary-db:/var/lib/mysql
         networks:
             - laravel-elibrary-network
+    phpmyadmin:
+        image: 'phpmyadmin:latest'
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: root
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        depends_on:
+            - mysql
+        networks:
+            - laravel-elibrary-network
 
 networks:
     laravel-elibrary-network:
