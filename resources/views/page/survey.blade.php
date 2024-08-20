@@ -33,7 +33,7 @@
 
             <p style="text-align: center">Terima kasih telah menjadi member kami!</p>
             <p style="text-align: center">Kami sangat menghargai waktu Anda untuk mengisi survei ini. Jawaban Anda akan membantu kami meningkatkan layanan kami </p>
-            <p style="text-align: center"> Klik tombol <strong>Survey</strong> untuk menampilkan QR Code dan memulai survei kepuasan member</p>
+            <p style="text-align: center"> Klik tombol <strong>Survey</strong> untuk memulai survei kepuasan member</p>
             <div style="margin-top: 30px"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfhvoI61yeVLFOdhgJC7JvI8xRRpU4bXJK1NmrDw1SHC277yw/viewform" target="_blank" style="background-color: #FFD966;color: black;padding: 12px 10px 12px 10px; border-radius: 10px;text-decoration: none;font-weight: 500;;">Survey Disini</a></div>
         </div>
         <div style="widows: 20%"><img src="https://cdn-icons-png.flaticon.com/512/671/671802.png" alt="survey" style="width: 100%"></div>

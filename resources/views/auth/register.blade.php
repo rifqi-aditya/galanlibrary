@@ -11,42 +11,42 @@
                     <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                            <p class="lead fw-normal mb-10 me-3 fs-1">Sign up</p>
+                            <p class="lead fw-normal mb-10 me-3 fs-1">Daftar Anggota Perpustakaan</p>
                         </div>
 
                         <!-- Name input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') }}" placeholder="Enter your name">
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') }}" placeholder="Masukan nama anda">
                         </div>
 
                         <!-- NIS input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label for="nis" class="form-label">Nomor Induk Siswa</label>
-                            <input type="text" class="form-control form-control-lg" id="nis" name="nis" value="{{ old('nis') }}" placeholder="Enter your NIS">
+                            <input type="text" class="form-control form-control-lg" id="nis" name="nis" value="{{ old('nis') }}" placeholder="Masukan nis anda">
                         </div>
 
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control form-control-lg" id="email" name="email" value="{{ old('email') }}" placeholder="Enter a valid email address">
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" value="{{ old('email') }}" placeholder="Masukan email anda">
                         </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter password">
+                            <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Masukan password">
                         </div>
 
                         <!-- Confirm Password input -->
                         <div data-mdb-input-init class="form-outline mb-3">
                             <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                            <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm your password">
+                            <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation" placeholder="Konfirmasi password">
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #FFD966;">Registrasi</button>
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Sudah punya akun? <a href="{{ route('login') }}" class="link-primary">Login</a></p>
+                            <button type="submit" class="btn btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #FFD966;">Daftar</button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Sudah punya akun? <a href="{{ route('login') }}" class="link-primary">Masuk</a></p>
                         </div>
                     </form>
                 </div>
