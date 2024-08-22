@@ -1,46 +1,32 @@
-# Gunakan image PHP resmi dengan ekstensi yang diperlukan
-FROM php:8.1-fpm
+# use PHP 8.2
+FROM php:8.2-fpm
 
-# Set working directory
-WORKDIR /var/www
-
-# Install dependensi system
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    curl \
-    libpng-dev \
+# Install common php extension dependencies
+RUN apt-get update && apt-get install -y \
+    libfreetype-dev \
     libjpeg62-turbo-dev \
-    libfreetype6-dev \
+    libpng-dev \
+    zlib1g-dev \
     libzip-dev \
-    zip \
     unzip \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install zip
 
-# Install ekstensi PHP yang dibutuhkan Laravel
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql gd zip opcache
+# Set the working directory
+COPY . /var/www/app
+WORKDIR /var/www/app
 
-# Konfigurasi OPCache
-RUN echo "opcache.memory_consumption=128" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo "opcache.interned_strings_buffer=8" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo "opcache.max_accelerated_files=4000" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo "opcache.revalidate_freq=2" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo "opcache.fast_shutdown=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+RUN chown -R www-data:www-data /var/www/app \
+    && chmod -R 775 /var/www/app/storage
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy seluruh file Laravel ke container
-COPY . .
+# install composer
+COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 
-# Beri hak akses
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
+# copy composer.json to workdir & install dependencies
+COPY composer.json ./
+RUN composer install
 
-# Jalankan Composer
-RUN composer install --optimize-autoloader --no-dev
-
-# Expose port 9000 dan jalankan PHP-FPM
-EXPOSE 9000
+# Set the default command to run php-fpm
 CMD ["php-fpm"]
