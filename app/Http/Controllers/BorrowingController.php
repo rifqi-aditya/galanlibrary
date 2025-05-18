@@ -7,6 +7,7 @@ use App\Models\Borrowing;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class BorrowingController extends Controller
@@ -16,16 +17,54 @@ class BorrowingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Skripsi
+
+    public function stores(Request $request)
+    {
+
+        // Log::info('Data request:', $request->all());
+
+        // dd($request->all());
+
+
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+
+        ]);
+
+
+
+        Borrowing::create([
+            'user_id' => auth()->id(),
+            'book_id' => $request->book_id,
+            'number_of_books' => 1,
+            'should_return_at' => now()->addDays(7)->toDateString(),
+            'status' => 'menunggu konfirmasi',
+        ]);
+
+        return redirect()->back()->with('success', 'Permintaan peminjaman berhasil dikirim.');
+    }
+
+
+
+
+
+    // end skripsi
+
+
+
+
     public function index()
     {
         $activeBorrowings = Borrowing::with(['user', 'book'])->where('return_date', '=', null)->orderBy('created_at', 'DESC')->get();
         $returnedBorrowings = Borrowing::with(['user', 'book'])->where('return_date', '!=', null)->orderBy('return_date', 'DESC')->get();
-        
+
         foreach ($activeBorrowings as $borrowing) {
             $borrowing->fine = $this->calculateFine($borrowing);
             $borrowing->save();
         }
-        
+
         return view('borrowing.index', [
             'activeBorrowings' => $activeBorrowings,
             'returnedBorrowings' => $returnedBorrowings,

@@ -17,6 +17,7 @@ class Borrowing extends Model
         'fine',
         'return_date',
         'return_status',
+        'status',
     ];
 
     protected $casts = [

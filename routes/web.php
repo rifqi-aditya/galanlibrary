@@ -5,6 +5,7 @@ use App\Http\Controllers\RackController;
 use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\HelpCenterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -36,11 +37,23 @@ Route::get('/', function () {
     return view('auth.no-session');
 })->middleware(['guest']);
 
+Route::get('/pusat-bantuan', [HelpCenterController::class, 'index'])->middleware(['guest']);
+
+Route::post('/borrowingss', [BorrowingController::class, 'stores'])->middleware(['auth', 'role:member'])->name('borrowings.store');
+
+
+
+
+
+
+
+
 Route::get('/contents/user-pictures/{path}', [ContentController::class, 'userPictures'])->name('user-pictures');
 Route::get('/contents/book-covers/{path}', [ContentController::class, 'bookCovers'])->name('book-covers');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home.index');
 Route::get('/home/book-detail/{book}', [HomeController::class, 'bookDetail'])->middleware(['auth', 'role:member'])->name('home.bookDetail');
+
 
 Route::get('/page/survey', [PageController::class, 'survey'])->middleware(['auth'])->name('page.survey');
 
