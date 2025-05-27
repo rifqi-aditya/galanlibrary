@@ -30,20 +30,52 @@
                         <td style="width: 30px;">{{ ++$index }}</td>
                         <td>{{ $activeBorrowing->book->title }}</td>
                         <td>{{ $activeBorrowing->user->name }}</td>
-                        <td>{{ $activeBorrowing->number_of_books }}</td>
+
+                        <td>
+                            @if ($activeBorrowing->status === 'menunggu konfirmasi')
+                                <span class="badge bg-warning text-dark">{{ $activeBorrowing->status }}</span>
+                            @else
+                                <span class="badge bg-success">{{ $activeBorrowing->status }}</span>
+                            @endif
+                        </td>
+
                         <td>{{ $activeBorrowing->created_at->format('d F Y') }}</td>
-                        <td>{{ $activeBorrowing->should_return_at->format('d F Y') }}</td>
+
+                        @if ($activeBorrowing->status === 'disetujui')
+                            <td>{{ $activeBorrowing->should_return_at->format('d F Y') }}</td>
+                        @else
+                            <td class="text-center">-</td>
+                        @endif
                         @if ($activeBorrowing->fine != null)
                             <td>Rp. {{ sprintf('%s,00', number_format($activeBorrowing->fine, 0, ',', '.')) }}</td>
                         @else
                             <td class="text-center">-</td>
                         @endif
                         <td class="text-center">
-                            <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
-                                class="link-primary material-icons text-decoration-none">
-                                visibility
-                            </a>
+                            <div class="d-flex justify-content-center gap-2">
+                                <!-- Icon Show -->
+                                <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
+                                    class="link-primary material-icons text-decoration-none" title="Lihat Detail">
+                                    visibility
+                                </a>
+
+                                <!-- Icon Checklist -->
+                                @if ($activeBorrowing->status === 'menunggu konfirmasi')
+                                    <form action="{{ route('borrowings.confirm', ['borrowing' => $activeBorrowing]) }}"
+                                        method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-success"
+                                            title="Konfirmasi">
+                                            <span class="material-icons">check_circle</span>
+                                        </button>
+                                    </form>
+                                @endif
+
+
+                            </div>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

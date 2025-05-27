@@ -18,103 +18,116 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     {{-- font --}}
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-    <style>
-        .love-label {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            position: relative;
-            cursor: pointer;
-            user-select: none;
+<style>
+    .love-label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .love-label::before,
+    .love-label::after {
+        content: "";
+        width: 25px;
+        height: 40px;
+        background: #ccc;
+        position: absolute;
+        border-radius: 25px 25px 0 0;
+        transition: all 0.3s ease;
+    }
+
+    .love-label::before {
+        left: 25px;
+        top: 0;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+    }
+
+    .love-label::after {
+        left: 0;
+        top: 0;
+        transform: rotate(45deg);
+        transform-origin: 100% 100%;
+    }
+
+    .love-checkbox:checked+.love-label::before,
+    .love-checkbox:checked+.love-label::after {
+        background: red;
+    }
+
+    .love-checkbox:checked+.love-label {
+        animation: heartbeat 0.5s ease-in-out;
+    }
+
+    @keyframes heartbeat {
+
+        0%,
+        100% {
+            transform: scale(1);
         }
 
-        .love-label::before,
-        .love-label::after {
-            content: "";
-            width: 25px;
-            height: 40px;
-            background: #ccc;
-            position: absolute;
-            border-radius: 25px 25px 0 0;
-            transition: all 0.3s ease;
+        50% {
+            transform: scale(1.2);
         }
+    }
 
-        .love-label::before {
-            left: 25px;
-            top: 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .love-label::after {
-            left: 0;
-            top: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        .love-checkbox:checked + .love-label::before,
-        .love-checkbox:checked + .love-label::after {
-            background: red;
-        }
-
-        .love-checkbox:checked + .love-label {
-            animation: heartbeat 0.5s ease-in-out;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-        .divider:after,
-        .divider:before {
+    .divider:after,
+    .divider:before {
         content: "";
         flex: 1;
         height: 1px;
         background: #eee;
-        }
-        .h-custom {
+    }
+
+    .h-custom {
         height: calc(100% - 73px);
-        }
-        @media (max-width: 450px) {
+    }
+
+    @media (max-width: 450px) {
         .h-custom {
-        height: 100%;
+            height: 100%;
         }
-        }
-        .nav-link-2 {
-         color: grey; /* Warna abu-abu muda saat tidak di-hover */
-         text-decoration: none; /* Menghapus garis bawah jika diinginkan */
-        }
+    }
 
-        .nav-link-2:hover {
-        color: black; /* Warna hitam saat di-hover */
-        }
+    .nav-link-2 {
+        color: grey;
+        /* Warna abu-abu muda saat tidak di-hover */
+        text-decoration: none;
+        /* Menghapus garis bawah jika diinginkan */
+    }
 
-        .material-symbols-outlined {
-        color: gray; /* Warna abu-abu saat tidak di-hover */
-        }
+    .nav-link-2:hover {
+        color: black;
+        /* Warna hitam saat di-hover */
+    }
 
-        .material-symbols-outlined:hover {
-        color: red; /* Warna merah saat di-hover */
-        }
-        body{
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
-<body >
+    .material-symbols-outlined {
+        color: gray;
+        /* Warna abu-abu saat tidak di-hover */
+    }
+
+    .material-symbols-outlined:hover {
+        color: red;
+        /* Warna merah saat di-hover */
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+
+<body>
     @include('layouts.partials.navbar')
     <main class=" col-lg-12">
-        @include('layouts.partials.alerts')
-       <div style="min-height: 100vh; padding-top: 50px; padding-left: 50px; padding-right: 50px">
-         @yield('main')
-       </div>
+        <div style="min-height: 100vh; padding-top: 50px; padding-left: 50px; padding-right: 50px">
+            @yield('main')
+        </div>
     </main>
     @include('layouts.partials.footer')
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -128,6 +141,17 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+
+    {{-- sweet alert --}}
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('layouts.partials.alerts')
+
+
+
+
+
     @yield('script')
 </body>
 

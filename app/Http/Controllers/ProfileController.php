@@ -17,7 +17,7 @@ class ProfileController extends Controller
     use PasswordValidationRules;
 
     public function index()
-    {   
+    {
         return view('profile.index', [
             'user' => auth()->user()
         ]);
@@ -128,18 +128,63 @@ class ProfileController extends Controller
         ])->send();
     }
 
+    // public function borrowings()
+    // {
+    //     $user = auth()->user();
+    //     $borrowings = Borrowing::with(['book'])->where('user_id', '=', $user->id)->orderBy('created_at', 'DESC')->get();
+
+    //     foreach ($borrowings as $borrowing) {
+    //         $borrowing->fine = $this->calculateFine($borrowing);
+    //         $borrowing->save();
+    //     }
+
+    //     return view('profile.borrowings', [
+    //         'borrowings' => $borrowings
+    //     ]);
+    // }
+
     public function borrowings()
     {
         $user = auth()->user();
-        $borrowings = Borrowing::with(['book'])->where('user_id', '=', $user->id)->orderBy('created_at', 'DESC')->get();
 
-        foreach ($borrowings as $borrowing) {
+        // 1. Belum disetujui oleh admin
+        $pendingBorrowings = Borrowing::with('book')
+            ->where('user_id', $user->id)
+            ->where('status', 'menunggu konfirmasi')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        // 2. Disetujui dan belum dikembalikan
+        $approvedNotReturned = Borrowing::with('book')
+            ->where('user_id', $user->id)
+            ->where('status', 'disetujui')
+            ->where(function ($query) {
+                $query->whereNull('return_status')
+                    ->orWhere('return_status', '!=', 'sudah dikembalikan');
+            })
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        // 3. Disetujui dan sudah dikembalikan
+        $approvedReturned = Borrowing::with('book')
+            ->where('user_id', $user->id)
+            ->where('status', 'disetujui')
+            ->where('return_status', 'sudah dikembalikan')
+            ->whereNotNull('return_date')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        // Hitung denda hanya untuk yang belum dikembalikan
+        foreach ($approvedNotReturned as $borrowing) {
             $borrowing->fine = $this->calculateFine($borrowing);
             $borrowing->save();
         }
 
+
         return view('profile.borrowings', [
-            'borrowings' => $borrowings
+            'pendingBorrowings' => $pendingBorrowings,
+            'approvedNotReturned' => $approvedNotReturned,
+            'approvedReturned' => $approvedReturned,
         ]);
     }
 

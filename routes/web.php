@@ -40,6 +40,7 @@ Route::get('/', function () {
 Route::get('/pusat-bantuan', [HelpCenterController::class, 'index'])->middleware(['guest']);
 
 Route::post('/borrowingss', [BorrowingController::class, 'stores'])->middleware(['auth', 'role:member'])->name('borrowings.store');
+Route::patch('/borrowings/confirm/{borrowing}', [BorrowingController::class, 'confirm'])->name('borrowings.confirm');
 
 
 

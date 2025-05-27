@@ -1,92 +1,200 @@
 @extends('layouts.main')
 
-@php
-    use Carbon\Carbon;
-@endphp
+
 
 @section('main')
-    <h3 class="mb-4">Peminjaman Buku Saya</h3>
+
     <div class="mb-3">
         <a href="{{ route('profile.index') }}" class="btn btn-sm btn-dark">Kembali</a>
     </div>
-    <div>
-        @forelse ($borrowings as $borrowing)
-            @if ($borrowing->return_date)
-                <div class="alert alert-success">
-                    <div class="row">
-                        <div class="col-lg-9 mb-3 mb-lg-0">
-                            <p class="mb-0">
-                                <strong>({{ $borrowing->book->category->name }}) -- {{ $borrowing->book->title }} --
-                                    {{ $borrowing->book->publisher->name }}</strong>
-                                <br>
-                                Tanggal Pinjam: {{ $borrowing->created_at->format('d F Y') }}
-                                <br>
-                                Batas Pengembalian: {{ $borrowing->should_return_at->format('d F Y') }}
-                                <br>
-                                Tanggal Kembali: {{ $borrowing->return_date->format('d F Y') }}
-                                <br>
-                                Status pengembalian:
-                                <strong>{{ $borrowing->return_status }}</strong>
-                            </p>
-                        </div>
-                        <div class="col-lg-3 mb-3 mb-lg-0 text-lg-end">
-                            <button type="button" disabled class="btn btn-sm btn-success mb-2">Sudah Dikembalikan</button>
-                            <a href="{{ route('profile.borrowingDetail', ['borrowing' => $borrowing]) }}"
-                                class="btn btn-sm btn-success">Lihat Detail</a>
-                        </div>
+    <div class="container py-4">
+        <h1 class="mb-4 text-primary">Riwayat Peminjaman Buku</h1>
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        <!-- Peminjaman Menunggu Konfirmasi -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-warning text-white">
+                <h2 class="h5 mb-0">
+                    <i class="fas fa-clock me-2"></i>Menunggu Konfirmasi
+                </h2>
+            </div>
+            <div class="card-body">
+                @if ($pendingBorrowings->isEmpty())
+                    <div class="alert alert-info mb-0">
+                        Tidak ada peminjaman yang menunggu konfirmasi.
                     </div>
-                </div>
-            @else
-                @if (Carbon::now()->diffInHours($borrowing->should_return_at, false) < 24 && Carbon::now()->diffInHours($borrowing->should_return_at, false) >= 0)
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Hai!</strong> 
-                        <br>
-                        <p>
-                            Hanya ingin mengingatkan bahwa batas waktu pengembalian buku kamu sudah dekat. 
-                            Pastikan untuk mengembalikan buku-buku yang kamu pinjam tepat waktu agar tidak dikenakan denda.
-                        </p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @else
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Judul Buku</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pendingBorrowings as $borrowing)
+                                    <tr>
+                                        <td>{{ $borrowing->book->title }}</td>
+                                        <td>{{ $borrowing->created_at->format('d M Y') }}</td>
+
+                                        <td>
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="fas fa-clock me-1"></i> {{ $borrowing->status }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 @endif
-                <div class="alert alert-warning">
-                    <div class="row">
-                        <div class="col-lg-9 mb-3 mb-lg-0">
-                            <p class="mb-0">
-                                <strong>({{ $borrowing->book->category->name }}) -- {{ $borrowing->book->title }} --
-                                    {{ $borrowing->book->publisher->name }}</strong>
-                                <br>
-                                Tanggal Pinjam: {{ $borrowing->created_at->format('d F Y') }}
-                                <br>
-                                Batas Pengembalian: {{ $borrowing->should_return_at->format('d F Y') }}
-                                <br>
-                                Sisa waktu Peminjaman:
-                                @if (now() > $borrowing->should_return_at)
-                                    <strong>0 Hari.</strong>
-                                @else
-                                    <strong>{{ $borrowing->should_return_at->diffInDays(now()) }} Hari.</strong>
-                                @endif
-                                @if ($borrowing->fine != null) 
-                                    <br>
-                                    Denda Peminjaman :
-                                    <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
-                                @endif
-                            </p>
-                        </div>
-                        <div class="col-lg-3 mb-3 mb-lg-0 text-lg-end">
-                            <button type="button" disabled class="btn btn-sm btn-warning mb-2">Belum Dikembalikan</button>
-                            <a href="{{ route('profile.borrowingDetail', ['borrowing' => $borrowing]) }}"
-                                class="btn btn-sm btn-warning">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        @empty
-            <div class="alert alert-info text-center">
-                <p><strong>Kamu belum meminjam buku apapun.</strong></p>
-                <p class="mb-0">
-                    Pergi ke perpustakaan dan pinjam buku sekarang! Membaca itu baik lho..
-                </p>
             </div>
-        @endforelse
+        </div>
+
+        <!-- Peminjaman Aktif -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5 mb-0">
+                    <i class="fas fa-book-open me-2"></i>Sedang Dipinjam
+                </h2>
+            </div>
+            <div class="card-body">
+                @if ($approvedNotReturned->isEmpty())
+                    <div class="alert alert-info mb-0">
+                        Tidak ada buku yang sedang dipinjam.
+                    </div>
+                @else
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Judul Buku</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Batas Pengembalian</th>
+                                    <th>Status</th>
+                                    <th>Denda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($approvedNotReturned as $borrowing)
+                                    <tr class="{{ $borrowing->fine > 0 ? 'table-danger' : '' }}">
+                                        <td>{{ $borrowing->book->title }}</td>
+                                        <td>{{ $borrowing->created_at->format('d M Y') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($borrowing->should_return_at)->format('d M Y') }}</td>
+                                        <td>
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check-circle me-1"></i> {{ $borrowing->status }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if ($borrowing->fine >= 0)
+                                                <span class="text-danger fw-bold">Rp
+                                                    {{ number_format($borrowing->fine, 0, ',', '.') }}</span>
+                                            @else
+                                                <span class="text-success">Tidak ada dendasss</span>
+                                            @endif
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Riwayat Peminjaman -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h2 class="h5 mb-0">
+                    <i class="fas fa-history me-2"></i>Riwayat Peminjaman
+                </h2>
+            </div>
+            <div class="card-body">
+                @if ($approvedReturned->isEmpty())
+                    <div class="alert alert-info mb-0">
+                        Belum ada riwayat peminjaman.
+                    </div>
+                @else
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Judul Buku</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Tanggal Kembali</th>
+                                    <th>Status</th>
+                                    <th>Denda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($approvedReturned as $borrowing)
+                                    <tr>
+                                        <td>{{ $borrowing->book->title }}</td>
+                                        <td>{{ $borrowing->created_at->format('d M Y') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($borrowing->return_date)->format('d M Y') }}</td>
+                                        <td>
+                                            <span class="badge bg-secondary">
+                                                <i class="fas fa-archive me-1"></i> Sudah dikembalikan
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if ($borrowing->fine > 0)
+                                                <span class="text-danger">Rp
+                                                    {{ number_format($borrowing->fine, 0, ',', '.') }} (Lunas)</span>
+                                            @else
+                                                <span class="text-success">Tidak ada denda</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
+@endsection
+
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            font-weight: 600;
+        }
+
+        .table th {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .badge {
+            padding: 0.5em 0.75em;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .alert {
+            border-radius: 8px;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+        }
+    </style>
 @endsection

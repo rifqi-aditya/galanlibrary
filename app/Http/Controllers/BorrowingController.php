@@ -39,11 +39,25 @@ class BorrowingController extends Controller
             'user_id' => auth()->id(),
             'book_id' => $request->book_id,
             'number_of_books' => 1,
-            'should_return_at' => now()->addDays(7)->toDateString(),
+            'should_return_at' => null,
+
+
+
             'status' => 'menunggu konfirmasi',
         ]);
 
-        return redirect()->back()->with('success', 'Permintaan peminjaman berhasil dikirim.');
+        return redirect()->route('profile.borrowings')->with('success', 'Buku berhasil dipinjam.');
+    }
+
+
+    public function confirm(Request $request, Borrowing $borrowing)
+    {
+        // dd($borrowing);
+
+        $borrowing->status = 'disetujui';
+        $borrowing->should_return_at = now()->addDays(7)->toDateString();
+        $borrowing->save();
+        return to_route('borrowing.index')->with('success', 'Terima kasih, Buku ' . $borrowing->book->title . ' berhasil ditandai sudah dikonfirmasi.');
     }
 
 
@@ -61,8 +75,13 @@ class BorrowingController extends Controller
         $returnedBorrowings = Borrowing::with(['user', 'book'])->where('return_date', '!=', null)->orderBy('return_date', 'DESC')->get();
 
         foreach ($activeBorrowings as $borrowing) {
-            $borrowing->fine = $this->calculateFine($borrowing);
-            $borrowing->save();
+            if ($borrowing->status == 'disetujui') {
+                $borrowing->fine = $this->calculateFine($borrowing);
+                $borrowing->save();
+            } else {
+                $borrowing->fine = 0;
+                $borrowing->save();
+            }
         }
 
         return view('borrowing.index', [
@@ -252,11 +271,14 @@ class BorrowingController extends Controller
 
         $returnDate = date('Y-m-d');
         if ($returnDate < $borrowing->should_return_at->format('Y-m-d')) {
-            $returnStatus = 'Lebih Awal';
+            // $returnStatus = 'Lebih Awal';
+            $returnStatus = 'sudah dikembalikan';
         } elseif ($returnDate == $borrowing->should_return_at->format('Y-m-d')) {
-            $returnStatus = 'Tepat Waktu';
+            // $returnStatus = 'Tepat Waktu';
+            $returnStatus = 'sudah dikembalikan';
         } else {
-            $returnStatus = 'Terlambat';
+            // $returnStatus = 'Terlambat';
+            $returnStatus = 'sudah dikembalikan';
         }
 
         $borrowing->forceFill([
