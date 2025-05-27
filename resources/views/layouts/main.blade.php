@@ -120,6 +120,65 @@
     body {
         font-family: 'Poppins', sans-serif;
     }
+
+
+
+    /* scanner */
+    .scanner-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: #000;
+    }
+
+    #scanner {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .scanner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0) 30%,
+                rgba(0, 0, 0, 0) 70%,
+                rgba(0, 0, 0, 0.3) 100%);
+        pointer-events: none;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+    }
+
+    .btn-primary {
+        background-color: #3a7bd5;
+        border-color: #3a7bd5;
+    }
+
+    .btn-primary:hover {
+        background-color: #2c5fb3;
+        border-color: #2c5fb3;
+    }
+
+    .card {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .input-group-lg .form-control,
+    .input-group-lg .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+    }
 </style>
 
 <body>

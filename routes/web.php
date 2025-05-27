@@ -14,9 +14,13 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use App\Models\Borrowing;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +41,43 @@ Route::get('/', function () {
     return view('auth.no-session');
 })->middleware(['guest']);
 
+
+// Skripsi
 Route::get('/pusat-bantuan', [HelpCenterController::class, 'index'])->middleware(['guest']);
 
 Route::post('/borrowingss', [BorrowingController::class, 'stores'])->middleware(['auth', 'role:member'])->name('borrowings.store');
 Route::patch('/borrowings/confirm/{borrowing}', [BorrowingController::class, 'confirm'])->name('borrowings.confirm');
+
+Route::get('/scan-return', [BorrowingController::class, 'showScanReturn'])->name('scan.return');
+Route::post('/process-return', [BorrowingController::class, 'processReturn'])->name('process.return');
+
+
+
+
+
+
+
+Route::get('/generate-borrowing-barcodes', function () {
+
+    $borrowingsWithoutBarcode = Borrowing::whereNull('barcode')->get();
+
+    $count = 0;
+
+    foreach ($borrowingsWithoutBarcode as $borrowing) {
+        $barcode = 'BRW-' . $borrowing->user_id . '-' . Carbon::now()->format('YmdHis') . '-' . Str::random(4);
+        $borrowing->barcode = $barcode;
+        $borrowing->save();
+        $count++;
+    }
+
+    return response()->json([
+        'message' => "$count barcode berhasil dibuat dan denda diperbarui.",
+    ]);
+});
+
+
+// End Skripsi
+
 
 
 

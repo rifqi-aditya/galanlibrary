@@ -79,6 +79,7 @@
                                     <th>Judul Buku</th>
                                     <th>Tanggal Pinjam</th>
                                     <th>Batas Pengembalian</th>
+                                    <th>Barcode</th>
                                     <th>Status</th>
                                     <th>Denda</th>
                                 </tr>
@@ -95,18 +96,52 @@
                                             </span>
                                         </td>
                                         <td>
-                                            @if ($borrowing->fine >= 0)
+
+                                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                                                data-bs-target="#barcodeModal{{ $borrowing->id }}">
+                                                <i class="fas fa-barcode"></i> Lihat Barcode
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            @if ($borrowing->fine > 0)
                                                 <span class="text-danger fw-bold">Rp
                                                     {{ number_format($borrowing->fine, 0, ',', '.') }}</span>
                                             @else
-                                                <span class="text-success">Tidak ada dendasss</span>
+                                                <span class="text-success">Tidak ada denda</span>
                                             @endif
                                         </td>
 
                                     </tr>
+                                    <!-- Tambahkan modal untuk menampilkan barcode -->
+                                    <div class="modal fade" id="barcodeModal{{ $borrowing->id }}" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Barcode Peminjaman</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <div class="mb-3">
+                                                        {!! DNS1D::getBarcodeHTML($borrowing->barcode, 'C128') !!}
+                                                        <div class="mt-2">{{ $borrowing->barcode }}</div>
+                                                    </div>
+                                                    <p class="text-muted">Gunakan barcode ini untuk proses pengembalian</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
+
                             </tbody>
                         </table>
+
                     </div>
                 @endif
             </div>

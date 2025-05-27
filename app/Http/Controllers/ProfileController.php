@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
+
+
 
 class ProfileController extends Controller
 {
@@ -128,20 +132,7 @@ class ProfileController extends Controller
         ])->send();
     }
 
-    // public function borrowings()
-    // {
-    //     $user = auth()->user();
-    //     $borrowings = Borrowing::with(['book'])->where('user_id', '=', $user->id)->orderBy('created_at', 'DESC')->get();
 
-    //     foreach ($borrowings as $borrowing) {
-    //         $borrowing->fine = $this->calculateFine($borrowing);
-    //         $borrowing->save();
-    //     }
-
-    //     return view('profile.borrowings', [
-    //         'borrowings' => $borrowings
-    //     ]);
-    // }
 
     public function borrowings()
     {
@@ -174,11 +165,6 @@ class ProfileController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        // Hitung denda hanya untuk yang belum dikembalikan
-        foreach ($approvedNotReturned as $borrowing) {
-            $borrowing->fine = $this->calculateFine($borrowing);
-            $borrowing->save();
-        }
 
 
         return view('profile.borrowings', [

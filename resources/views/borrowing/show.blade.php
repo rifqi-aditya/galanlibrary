@@ -9,8 +9,7 @@
                 <a href="{{ route('borrowing.edit', ['borrowing' => $borrowing]) }}" class="btn btn-dark btn-sm">Edit</a>
             @endcan
             @can('delete.borrowings')
-                <form class="d-inline" action="{{ route('borrowing.destroy', ['borrowing' => $borrowing]) }}"
-                    method="post">
+                <form class="d-inline" action="{{ route('borrowing.destroy', ['borrowing' => $borrowing]) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-sm"
@@ -45,6 +44,35 @@
             <h5>Batas Waktu Pengembalian</h5>
             <p>{{ $borrowing->should_return_at->format('d F Y') }}</p>
         </div>
+        <div>
+            <small class="text-muted d-block">{{ $borrowing->barcode }}</small>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                data-bs-target="#barcodeModal{{ $borrowing->id }}">
+                <i class="fas fa-barcode"></i> Lihat Barcode
+            </button>
+
+            <!-- Tambahkan modal untuk menampilkan barcode -->
+            <div class="modal fade" id="barcodeModal{{ $borrowing->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Barcode Peminjaman</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div class="mb-3">
+                                {!! DNS1D::getBarcodeHTML($borrowing->barcode, 'C128') !!}
+                                <div class="mt-2">{{ $borrowing->barcode }}</div>
+                            </div>
+                            <p class="text-muted">Gunakan barcode ini untuk proses pengembalian</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <h5>Status Peminjaman Buku</h5>
@@ -59,7 +87,7 @@
                     @endif
                 </p>
                 @if ($borrowing->fine != null)
-                    <p>Denda : 
+                    <p>Denda :
                         <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
                     </p>
                 @endif
@@ -87,8 +115,8 @@
                     <strong>{{ $borrowing->return_status }}</strong>
                     <br>
                     @if ($borrowing->fine != null)
-                    Denda pengembalian : 
-                    <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
+                        Denda pengembalian :
+                        <strong>Rp. {{ sprintf('%s,00', number_format($borrowing->fine, 0, ',', '.')) }}</strong>
                     @endif
                 </p>
             </div>

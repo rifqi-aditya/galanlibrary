@@ -7,8 +7,9 @@ use App\Models\Borrowing;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
 class BorrowingController extends Controller
 {
@@ -18,7 +19,9 @@ class BorrowingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // Skripsi
+
+
+    // Skripsi ================
 
     public function stores(Request $request)
     {
@@ -56,15 +59,47 @@ class BorrowingController extends Controller
 
         $borrowing->status = 'disetujui';
         $borrowing->should_return_at = now()->addDays(7)->toDateString();
+        $borrowing->barcode = 'BRW-' . time() . '-' . Str::random(4);
         $borrowing->save();
         return to_route('borrowing.index')->with('success', 'Terima kasih, Buku ' . $borrowing->book->title . ' berhasil ditandai sudah dikonfirmasi.');
+    }
+
+    public function showScanReturn()
+    {
+        return view('borrowing.scan-return');
+    }
+
+    public function processReturn(Request $request)
+    {
+        $request->validate([
+            'barcode' => 'required|string'
+        ]);
+
+        // dd($request->all());
+
+        $borrowing = Borrowing::where('barcode', $request->barcode)
+            ->where('return_date', null)
+            ->first();
+
+        if (!$borrowing) {
+            return back()->with('error', 'Peminjaman tidak ditemukan atau buku sudah dikembalikan');
+        }
+
+        $borrowing->update([
+            'return_status' => 'sudah dikembalikan',
+            'return_date' => now(),
+        ]);
+
+        return back()->with('success', 'Buku berhasil dikembalikan: ' . $borrowing->book->title);
     }
 
 
 
 
 
-    // end skripsi
+
+
+    // end skripsi  ===================
 
 
 
