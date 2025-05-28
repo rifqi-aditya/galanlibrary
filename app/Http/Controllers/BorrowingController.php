@@ -77,9 +77,13 @@ class BorrowingController extends Controller
 
         // dd($request->all());
 
+
+
+
         $borrowing = Borrowing::where('barcode', $request->barcode)
             ->where('return_date', null)
             ->first();
+
 
         if (!$borrowing) {
             return back()->with('error', 'Peminjaman tidak ditemukan atau buku sudah dikembalikan');

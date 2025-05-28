@@ -19,6 +19,10 @@
 
     {{-- font --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
 </head>
 
 <style>
@@ -124,60 +128,150 @@
 
 
     /* scanner */
-    .scanner-container {
-        position: relative;
-        width: 100%;
-        max-width: 500px;
-        height: 300px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        background: #000;
-    }
-
-    #scanner {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .scanner-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom,
-                rgba(0, 0, 0, 0.3) 0%,
-                rgba(0, 0, 0, 0) 30%,
-                rgba(0, 0, 0, 0) 70%,
-                rgba(0, 0, 0, 0.3) 100%);
-        pointer-events: none;
-    }
 
     .bg-gradient-primary {
         background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
     }
 
+    .bg-light-blue {
+        background-color: #f8fbff;
+    }
+
+    .scanner-container {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .scanner-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #reader {
+        width: 100%;
+        height: 300px;
+        background: #000;
+        position: relative;
+    }
+
+    #reader::after {
+        content: "Arahkan kamera ke barcode buku";
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .scanline {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: rgba(58, 123, 213, 0.8);
+        box-shadow: 0 0 10px rgba(58, 123, 213, 0.8);
+        animation: scan 2.5s infinite linear;
+        z-index: 10;
+    }
+
+    @keyframes scan {
+        0% {
+            top: 0;
+        }
+
+        100% {
+            top: 100%;
+        }
+    }
+
+    .corner {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-color: #3a7bd5;
+        border-width: 4px;
+        z-index: 9;
+    }
+
+    .corner.top-left {
+        top: 10px;
+        left: 10px;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    .corner.top-right {
+        top: 10px;
+        right: 10px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left: none;
+        border-bottom: none;
+    }
+
+    .corner.bottom-left {
+        bottom: 10px;
+        left: 10px;
+        border-bottom-style: solid;
+        border-left-style: solid;
+        border-top: none;
+        border-right: none;
+    }
+
+    .corner.bottom-right {
+        bottom: 10px;
+        right: 10px;
+        border-bottom-style: solid;
+        border-right-style: solid;
+        border-top: none;
+        border-left: none;
+    }
+
+    .guide-card {
+        border: 1px solid rgba(58, 123, 213, 0.2);
+    }
+
+    .step-number {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .manual-card {
+        border: 1px solid rgba(58, 123, 213, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+        padding: 12px 15px;
+    }
+
     .btn-primary {
         background-color: #3a7bd5;
         border-color: #3a7bd5;
+        transition: all 0.3s;
     }
 
     .btn-primary:hover {
-        background-color: #2c5fb3;
-        border-color: #2c5fb3;
-    }
-
-    .card {
-        border-radius: 16px;
-        overflow: hidden;
-    }
-
-    .input-group-lg .form-control,
-    .input-group-lg .btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.1rem;
+        background-color: #2c65b4;
+        border-color: #2c65b4;
+        transform: translateY(-2px);
     }
 </style>
 

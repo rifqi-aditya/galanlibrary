@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Models\User;
+
 
 
 /*
@@ -54,9 +56,6 @@ Route::post('/process-return', [BorrowingController::class, 'processReturn'])->n
 
 
 
-
-
-
 Route::get('/generate-borrowing-barcodes', function () {
 
     $borrowingsWithoutBarcode = Borrowing::whereNull('barcode')->get();
@@ -75,6 +74,30 @@ Route::get('/generate-borrowing-barcodes', function () {
     ]);
 });
 
+Route::get('/generate-users-barcodes', function () {
+
+    $usersWithoutBarcode = User::whereNull('barcode')->get();
+    $count = 0;
+
+    foreach ($usersWithoutBarcode as $user) {
+        $barcode = 'BRW-' . $user->user_id . '-' . Carbon::now()->format('YmdHis') . '-' . Str::random(4);
+        $user->barcode = $barcode;
+        $user->save();
+        $count++;
+    }
+
+    return response()->json([
+        'message' => "$count barcode berhasil dibuat dan denda diperbarui.",
+    ]);
+});
+
+
+// absensi Karyawan
+
+
+ROute::get('/absensi', [BorrowingController::class, 'index'])->name('absensi.index');
+
+// end absensi Karyawan
 
 // End Skripsi
 

@@ -54,10 +54,13 @@
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
                                 <!-- Icon Show -->
-                                <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
-                                    class="link-primary material-icons text-decoration-none" title="Lihat Detail">
-                                    visibility
-                                </a>
+
+                                @if ($activeBorrowing->status === 'disetujui')
+                                    <a href="{{ route('borrowing.show', ['borrowing' => $activeBorrowing]) }}"
+                                        class="link-primary material-icons text-decoration-none" title="Lihat Detail">
+                                        visibility
+                                    </a>
+                                @endif
 
                                 <!-- Icon Checklist -->
                                 @if ($activeBorrowing->status === 'menunggu konfirmasi')

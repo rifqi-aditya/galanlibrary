@@ -123,13 +123,22 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body text-center">
-                                                    <div class="mb-3">
-                                                        {!! DNS1D::getBarcodeHTML($borrowing->barcode, 'C128') !!}
-                                                        <div class="mt-2">{{ $borrowing->barcode }}</div>
+                                                <div class="modal-body">
+                                                    <div
+                                                        class="d-flex flex-column align-items-center justify-content-center">
+                                                        <div class="mb-3 text-center">
+                                                            <div class="p-3 bg-light rounded">
+                                                                {!! DNS2D::getBarcodeHTML($borrowing->barcode, 'QRCODE') !!}
+                                                            </div>
+                                                            <div class="mt-2 bg-light rounded px-3 py-1">
+                                                                {{ $borrowing->barcode }}
+                                                            </div>
+                                                        </div>
+                                                        <p class="text-muted text-center">Gunakan barcode ini untuk proses
+                                                            pengembalian</p>
                                                     </div>
-                                                    <p class="text-muted">Gunakan barcode ini untuk proses pengembalian</p>
                                                 </div>
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Tutup</button>

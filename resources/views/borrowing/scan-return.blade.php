@@ -1,99 +1,120 @@
 @extends('layouts.main')
 
 @section('main')
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-8">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-primary text-white py-3">
-                        <div class="d-flex align-items-center">
-                            <span class="material-icons md-36 me-3">qr_code_scanner</span>
-                            <div>
-                                <h4 class="mb-1">Scan Pengembalian Buku</h4>
-                                <p class="mb-0 small opacity-75">Gunakan scanner untuk proses pengembalian yang lebih cepat
-                                </p>
-                            </div>
-                        </div>
+    <div class="container py-5">
+        <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="card-header bg-gradient-primary text-white py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0"><i class="fas fa-book-reader me-2"></i>Pengembalian Buku</h3>
+                    <div class="badge bg-white text-primary p-2">
+                        <i class="fas fa-qrcode me-1"></i> Sistem Barcode
                     </div>
+                </div>
+            </div>
 
-                    <div class="card-body p-4">
-                        <!-- Alert Notifications -->
-                        @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-4">
-                                <span class="material-icons me-2">check_circle</span>
-                                <div>{{ session('success') }}</div>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    <!-- Scanner Section -->
+                    <div class="col-lg-7 p-4">
                         @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mb-4">
-                                <span class="material-icons me-2">error</span>
-                                <div>{{ session('error') }}</div>
+                            <div class="alert alert-danger alert-dismissible fade show mb-4">
+                                <i class="fas fa-exclamation-triangle me-2"></i>{{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
                         @endif
 
-                        <!-- Scanner Section -->
-                        <div class="text-center mb-4">
-                            <div class="scanner-frame mb-3 mx-auto p-2 bg-dark rounded">
-                                <video id="scanner" class="w-100" style="max-height: 300px;"></video>
-                                <div class="scanner-guide"></div>
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show mb-4">
+                                <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
-                            <p class="text-muted mb-4">
-                                <span class="material-icons align-middle me-2">tips_and_updates</span>
-                                Arahkan kamera ke barcode buku yang akan dikembalikan
-                            </p>
-                        </div>
+                        @endif
 
-                        <!-- Hidden Form -->
-                        <form id="return-form" method="POST" action="{{ route('process.return') }}">
-                            @csrf
-                            <input type="hidden" name="barcode" id="barcode-input">
-                        </form>
-
-                        <!-- Scanner Controls -->
-                        <div class="d-flex justify-content-center mb-4 gap-3">
-                            <button id="start-scanner" class="btn btn-primary px-4">
-                                <span class="material-icons align-middle me-2">play_arrow</span>
-                                Mulai Scan
-                            </button>
-                            <button id="stop-scanner" class="btn btn-outline-secondary px-4" disabled>
-                                <span class="material-icons align-middle me-2">stop</span>
-                                Stop
-                            </button>
-                        </div>
-
-                        <!-- Divider -->
-                        <div class="position-relative my-4">
-                            <hr class="my-4">
-                            <div class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">
-                                ATAU
-                            </div>
-                        </div>
-
-                        <!-- Manual Input -->
-                        <div class="text-center">
-                            <h5 class="mb-3 text-muted d-flex align-items-center justify-content-center">
-                                <span class="material-icons me-2">keyboard</span>
-                                Input Manual
-                            </h5>
-                            <div class="input-group mx-auto" style="max-width: 400px;">
-                                <input type="text" class="form-control" placeholder="Masukkan kode barcode">
-                                <button class="btn btn-primary" type="button" id="manual-submit">
-                                    <span class="material-icons align-middle">send</span>
+                        <div class="scanner-container mb-4">
+                            <div class="scanner-header d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0"><i class="fas fa-camera me-2"></i>Scanner Barcode</h5>
+                                <button id="toggle-camera" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-sync-alt me-1"></i>Ganti Kamera
                                 </button>
                             </div>
+
+                            <div class="scanner-wrapper position-relative">
+                                <div id="reader" class="rounded-3 overflow-hidden"></div>
+                                <div class="scanline"></div>
+                                <div class="corner top-left"></div>
+                                <div class="corner top-right"></div>
+                                <div class="corner bottom-left"></div>
+                                <div class="corner bottom-right"></div>
+                            </div>
+                        </div>
+
+                        <div class="guide-card bg-light-blue p-4 rounded-3">
+                            <h5 class="d-flex align-items-center mb-3">
+                                <i class="fas fa-info-circle me-2 text-primary"></i>Petunjuk Pengembalian
+                            </h5>
+                            <div class="guide-steps">
+                                <div class="step d-flex mb-2">
+                                    <div
+                                        class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                        1</div>
+                                    <div class="step-text">Arahkan kamera ke barcode buku hingga terdeteksi otomatis</div>
+                                </div>
+                                <div class="step d-flex mb-2">
+                                    <div
+                                        class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                        2</div>
+                                    <div class="step-text">Atau masukkan kode barcode secara manual di kolom sebelah</div>
+                                </div>
+                                <div class="step d-flex">
+                                    <div
+                                        class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                        3</div>
+                                    <div class="step-text">Tunggu konfirmasi bahwa buku berhasil dikembalikan</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card-footer bg-light py-3 text-center">
-                        <small class="text-muted d-flex align-items-center justify-content-center">
-                            <span class="material-icons md-18 me-2">info</span>
-                            Pastikan barcode terlihat jelas dan dalam pencahayaan yang cukup
-                        </small>
+                    <!-- Manual Input Section -->
+                    <div class="col-lg-5 bg-light-blue p-4">
+                        <div class="manual-card bg-white p-4 rounded-3 h-100">
+                            <h5 class="text-center mb-4"><i class="fas fa-keyboard me-2 text-primary"></i>Input Manual</h5>
+
+                            <form id="return-form" method="POST" action="{{ route('process.return') }}">
+                                @csrf
+                                <div class="mb-4">
+                                    <label for="manual-barcode" class="form-label fw-bold">Kode Barcode</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-barcode"></i>
+                                        </span>
+                                        <input type="text" class="form-control form-control-lg border-primary"
+                                            id="manual-barcode" name="barcode" placeholder="BRW-12345678"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg w-100 py-3 shadow-sm">
+                                    <i class="fas fa-paper-plane me-2"></i>Proses Pengembalian
+                                </button>
+                            </form>
+
+                            <div class="mt-4 pt-3 border-top">
+                                <h6 class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-lightbulb me-2 text-warning"></i>Tips Cepat
+                                </h6>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Pastikan
+                                        barcode terlihat jelas</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Gunakan
+                                        pencahayaan yang cukup</li>
+                                    <li><i class="fas fa-check-circle text-success me-2"></i> Tahan buku tetap stabil saat
+                                        scanning</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,70 +122,139 @@
     </div>
 @endsection
 
+
+
 @section('script')
-    <!-- Include Instascan library untuk barcode scanning -->
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        let currentCameraId = null;
+        let html5QrcodeScanner = null;
+        let isProcessingScan = false;
+
+        function initializeScanner(cameraId = null) {
+            const config = {
+                fps: 10,
+                qrbox: {
+                    width: 250,
+                    height: 250
+                },
+                rememberLastUsedCamera: true
+            };
+
+            if (cameraId) {
+                config.videoConstraints = {
+                    deviceId: cameraId,
+                    facingMode: "environment"
+                };
+            }
+
+            if (html5QrcodeScanner) {
+                html5QrcodeScanner.clear().then(() => {
+                    html5QrcodeScanner = new Html5QrcodeScanner(
+                        "reader", config, /* verbose= */ false);
+                    html5QrcodeScanner.render(onScanSuccess);
+                }).catch(err => {
+                    console.error("Error clearing scanner: ", err);
+                });
+            } else {
+                html5QrcodeScanner = new Html5QrcodeScanner(
+                    "reader", config, /* verbose= */ false);
+                html5QrcodeScanner.render(onScanSuccess);
+            }
+        }
+
+        async function onScanSuccess(decodedText, decodedResult) {
+            if (isProcessingScan) return;
+            isProcessingScan = true;
+
+            // Stop camera and remove scanner UI
+            try {
+                await html5QrcodeScanner.clear();
+                document.getElementById('reader').innerHTML = '';
+                document.querySelector('.scanline').style.display = 'none';
+            } catch (err) {
+                console.error("Error stopping scanner: ", err);
+            }
+
+            // Play sound
+            const audio = new Audio('{{ asset('sound/beep.mp3') }}');
+            audio.play().catch(e => console.log("Audio play failed:", e));
+
+            // Show success animation
+            const readerElement = document.getElementById('reader');
+            readerElement.style.background = 'transparent';
+            readerElement.innerHTML = `
+            <div class="success-animation d-flex flex-column justify-content-center align-items-center h-100">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <div class="text-success mt-3 fw-bold">Barcode Terdeteksi!</div>
+            </div>
+        `;
+
+            // Show alert
+            await Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Memproses pengembalian buku...',
+                showConfirmButton: false,
+                timer: 2000,
+                background: 'white',
+                backdrop: `
+                rgba(58,123,213,0.4)
+                url("/images/loading.gif")
+                center top
+                no-repeat
+            `
+            });
+
+            // Submit form
+            document.getElementById("manual-barcode").value = decodedText;
+            document.getElementById("return-form").submit();
+
+            // Reset after delay
+            setTimeout(() => {
+                isProcessingScan = false;
+                // initializeScanner(currentCameraId); // Uncomment to auto-restart
+            }, 3000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            let scanner = null;
-            const videoElem = document.getElementById('scanner');
-            const startBtn = document.getElementById('start-scanner');
-            const stopBtn = document.getElementById('stop-scanner');
-            const barcodeInput = document.getElementById('barcode-input');
-            const returnForm = document.getElementById('return-form');
-            const manualInput = document.querySelector('.form-control');
-            const manualSubmit = document.getElementById('manual-submit');
+            initializeScanner();
 
-            startBtn.addEventListener('click', function() {
-                Instascan.Camera.getCameras().then(function(cameras) {
-                    if (cameras.length > 0) {
-                        scanner = new Instascan.Scanner({
-                            video: videoElem,
-                            mirror: false
-                        });
+            document.getElementById('toggle-camera').addEventListener('click', async function() {
+                if (isProcessingScan) return;
 
-                        scanner.addListener('scan', function(content) {
-                            barcodeInput.value = content;
-                            returnForm.submit();
-                        });
+                try {
+                    const devices = await Html5Qrcode.getCameras();
+                    if (devices && devices.length > 1) {
+                        const currentIndex = currentCameraId ?
+                            devices.findIndex(device => device.id === currentCameraId) : 0;
+                        const nextIndex = (currentIndex + 1) % devices.length;
+                        currentCameraId = devices[nextIndex].id;
+                        initializeScanner(currentCameraId);
 
-                        scanner.start(cameras[0]).then(function() {
-                            startBtn.disabled = true;
-                            stopBtn.disabled = false;
-                        }).catch(function(e) {
-                            console.error(e);
-                            alert('Gagal memulai scanner: ' + e);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: `Kamera: ${devices[nextIndex].label || 'Kamera ' + (nextIndex + 1)}`,
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
                         });
                     } else {
-                        alert('Tidak ada kamera ditemukan!');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Hanya 1 kamera tersedia',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+                        });
                     }
-                }).catch(function(e) {
-                    console.error(e);
-                    alert('Error mengakses kamera: ' + e);
-                });
-            });
-
-            stopBtn.addEventListener('click', function() {
-                if (scanner) {
-                    scanner.stop();
-                    startBtn.disabled = false;
-                    stopBtn.disabled = true;
-                }
-            });
-
-            manualSubmit.addEventListener('click', function() {
-                if (manualInput.value.trim() !== '') {
-                    barcodeInput.value = manualInput.value.trim();
-                    returnForm.submit();
-                } else {
-                    alert('Silakan masukkan kode barcode');
-                }
-            });
-
-            // Submit juga ketika tekan enter di input manual
-            manualInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    manualSubmit.click();
+                } catch (err) {
+                    console.error("Error getting cameras: ", err);
                 }
             });
         });

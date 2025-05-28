@@ -109,4 +109,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class);
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(AttendancesModel::class);
+    }
 }
