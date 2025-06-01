@@ -3,10 +3,13 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Illuminate\Support\Str;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -41,6 +44,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'nis' => $input['nis'],
+            'barcode' => 'BRW-' . $input['nis'] . '-' . Carbon::now()->format('YmdHis') . '-' . Str::random(4), //' BRW - ' . $user->user_id . ' - ' . Carbon::now()->format(' YmdHis ') . ' - ' . Str::random(4);'
             'password' => Hash::make($input['password']),
         ]);
 

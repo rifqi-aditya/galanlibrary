@@ -220,6 +220,26 @@
                     </a>
                 </div>
             @endcan
+            @can('create.reports')
+                <div class="col-lg-4 mb-3">
+                    <a href="{{ route('absensi.index') }}" class="text-decoration-none">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex h-100 justify-content-between align-items-center">
+                                    <div>
+                                        <span class="material-icons card-icon text-warning">
+                                            calendar_month
+                                        </span>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="mb-0 text-warning">Absensi</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endcan
         </div>
     </div>
 @endsection

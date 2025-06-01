@@ -130,7 +130,7 @@
     /* scanner */
 
     .bg-gradient-primary {
-        background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+        background: linear-gradient(135deg, #A86523 0%, #E9A319 100%);
     }
 
     .bg-light-blue {
@@ -180,8 +180,8 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: rgba(58, 123, 213, 0.8);
-        box-shadow: 0 0 10px rgba(58, 123, 213, 0.8);
+        background: rgba(213, 156, 58, 0.8);
+        box-shadow: 0 0 10px rgba(213, 156, 58, 0.8);
         animation: scan 2.5s infinite linear;
         z-index: 10;
     }
@@ -200,7 +200,7 @@
         position: absolute;
         width: 30px;
         height: 30px;
-        border-color: #3a7bd5;
+        border-color: #E9A319;
         border-width: 4px;
         z-index: 9;
     }
@@ -242,7 +242,7 @@
     }
 
     .guide-card {
-        border: 1px solid rgba(58, 123, 213, 0.2);
+        border: 1px solid rgba(221, 161, 12, 0.2);
     }
 
     .step-number {
@@ -253,7 +253,7 @@
     }
 
     .manual-card {
-        border: 1px solid rgba(58, 123, 213, 0.2);
+        border: 1px solid rgba(221, 161, 12, 0.2);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
@@ -263,15 +263,169 @@
     }
 
     .btn-primary {
-        background-color: #3a7bd5;
-        border-color: #3a7bd5;
+        background-color: #E9A319;
+        border-color: #E9A319;
         transition: all 0.3s;
     }
 
     .btn-primary:hover {
-        background-color: #2c65b4;
-        border-color: #2c65b4;
+        background-color: #A86523;
+        border-color: #A86523;
         transform: translateY(-2px);
+    }
+
+
+    /* Detail Absensi */
+
+    /* Gradient Text */
+    .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Icon Circles */
+    .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-primary-light {
+        background-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .bg-success-light {
+        background-color: rgba(40, 167, 69, 0.1);
+    }
+
+    .bg-info-light {
+        background-color: rgba(23, 162, 184, 0.1);
+    }
+
+    .bg-warning-light {
+        background-color: rgba(255, 193, 7, 0.1);
+    }
+
+    /* Timeline Design */
+    .timeline {
+        position: relative;
+        padding-left: 50px;
+    }
+
+    .timeline:before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e9ecef;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .timeline-badge {
+        position: absolute;
+        left: -50px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        box-shadow: 0 0 0 4px white, 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-badge.success {
+        background: #28a745;
+    }
+
+    .timeline-badge.warning {
+        background: #ffc107;
+    }
+
+    .timeline-badge.info {
+        background: #17a2b8;
+    }
+
+    .timeline-badge.danger {
+        background: #dc3545;
+    }
+
+    .timeline-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+    }
+
+    .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .timeline-date {
+        color: #6c757d;
+        font-size: 0.85rem;
+    }
+
+    .timeline-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .timeline-info i {
+        margin-right: 8px;
+        color: #6c757d;
+        width: 20px;
+        text-align: center;
+    }
+
+    .timeline-notes {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    /* Blob Background Effect */
+    .blob {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        right: -50px;
+        top: -50px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .timeline {
+            padding-left: 30px;
+        }
+
+        .timeline:before {
+            left: 15px;
+        }
+
+        .timeline-badge {
+            left: -30px;
+            width: 30px;
+            height: 30px;
+            font-size: 14px;
+        }
     }
 </style>
 

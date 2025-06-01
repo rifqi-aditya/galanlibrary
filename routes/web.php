@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendancesController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RackController;
 use App\Http\Controllers\BorrowingController;
@@ -93,9 +94,15 @@ Route::get('/generate-users-barcodes', function () {
 
 
 // absensi Karyawan
+ROute::get('/absensi', [AttendancesController::class, 'index'])->name('absensi.index');
+ROute::post('/absensi-store', [AttendancesController::class, 'store'])->name('absensi.store');
+ROute::get('/absensi/{user}', [AttendancesController::class, 'user'])->name('absensi.user');
 
 
-ROute::get('/absensi', [BorrowingController::class, 'index'])->name('absensi.index');
+ROute::get('/absensi-barcode', [AttendancesController::class, 'test'])->name('absensi.test');
+
+
+
 
 // end absensi Karyawan
 

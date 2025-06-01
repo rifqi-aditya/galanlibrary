@@ -31,6 +31,7 @@ class User extends Authenticatable
         'address',
         'date_of_birth',
         'picture',
+        'barcode',
     ];
 
     /**
