@@ -37,8 +37,8 @@ class AttendancesController extends Controller
         // dd($user);
 
         $now = Carbon::now(); // waktu saat ini
-        $start = Carbon::createFromTime(0, 0, 0);
-        $end = Carbon::createFromTime(22, 50, 0);
+        $start = Carbon::createFromTime(8, 0, 0);
+        $end = Carbon::createFromTime(12, 0, 0);
 
         // Jika sebelum jam 08:00
         if ($now->lt($start)) {

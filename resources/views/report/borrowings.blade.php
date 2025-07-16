@@ -19,8 +19,8 @@
                         <th>Judul Buku</th>
                         <th>Kategori</th>
                         <th>User</th>
-                        <th>Jumlah Pinjam</th>
-                        <th>Tanggal Pinjam</th>
+                        <th>Status Peminjaman</th>
+                        <th>Tanggal Peminjaman</th>
                         <th>Batas Pengembalian</th>
                         <th>Status Pengembalian</th>
                         <th>Tanggal Kembali</th>

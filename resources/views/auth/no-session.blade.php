@@ -11,12 +11,12 @@
                 <div class="col-lg-6 mb-3 d-lg-flex align-items-center justify-content-center order-lg-1 order-2">
                     <div class="d-flex flex-column justify-content-center align-items-start p-10"
                         style="height: 300px; padding-left: 10px;">
-                        <h4 class="fs-1 " style="font-weight: bold; width: 300px;width: 100%; color: #FFD966;">SELAMAT
+                        <h4 class="fs-1 " style="font-weight: bold; width: 300px;width: 100%; color: #F9B572;">SELAMAT
                             DATANG</h4>
                         <h1 class="text-white fs-4">Di Sistem Informasi Galan Library</h1>
                         <div class="mt-3">
                             <a href="{{ route('login') }}"
-                                style="padding: 10px 20px; background-color: #FFD966; color: black; border-radius: 10px; text-decoration: none; font-weight: bold;">Login</a>
+                                style="padding: 10px 20px; background-color: #F9B572; color: black; border-radius: 10px; text-decoration: none; font-weight: bold;">Login</a>
                         </div>
                     </div>
                 </div>
@@ -213,15 +213,15 @@
     </section>
 
     <!-- Premium Features Section -->
-    <section id="premium-features" class="py-5" style="background-color: #F9B572;">
+    {{-- <section id="premium-features" class="py-5" style="background-color: #F9B572;">
         <div class="container py-5">
             <h2 style="color: #fff" class="text-center section-title">Fasilitas Eksklusif</h2>
             <p class="text-center lead mb-5 text-dark">Nikmati fitur premium yang dirancang khusus untuk pengalaman belajar
-                maksimal</p>
-
+                maksimal</p> --}}
+{{--
             <div class="row g-4">
-                <!-- Feature 1 -->
-                <div class="col-lg-6">
+                {{-- {{-- <!-- Feature 1 --> --}}
+                {{-- <div class="col-lg-6">
                     <div class="card p-4 h-100 border-0 shadow-sm" style="background-color: rgba(255, 255, 255, 0.9);">
                         <div class="d-flex align-items-start">
                             <div class="bg-white rounded-circle p-3 me-4 shadow-sm">
@@ -235,10 +235,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Feature 2 -->
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="card p-4 h-100 border-0 shadow-sm" style="background-color: rgba(255, 255, 255, 0.9);">
                         <div class="d-flex align-items-start">
                             <div class="bg-white rounded-circle p-3 me-4 shadow-sm">
@@ -252,10 +252,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Feature 3 -->
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="card p-4 h-100 border-0 shadow-sm" style="background-color: rgba(255, 255, 255, 0.9);">
                         <div class="d-flex align-items-start">
                             <div class="bg-white rounded-circle p-3 me-4 shadow-sm">
@@ -270,10 +270,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Feature 4 -->
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="card p-4 h-100 border-0 shadow-sm" style="background-color: rgba(255, 255, 255, 0.9);">
                         <div class="d-flex align-items-start">
                             <div class="bg-white rounded-circle p-3 me-4 shadow-sm">
@@ -290,17 +290,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="text-center mt-5">
+            {{-- <div class="text-center mt-5">
                 <a href="#" class="btn btn-lg px-5 py-3"
                     style="background-color: #2A4E6E; color: white; border-radius: 50px;">
                     <i class="fas fa-gem me-2"></i> Dapatkan Akses Premium
                 </a>
                 <p class="mt-3 text-dark">Garansi 30 hari uang kembali</p>
-            </div>
-        </div>
-    </section>
+            </div> --}}
+        {{-- </div>
+    </section> --}}
 
 
     <!-- CTA Section -->
@@ -309,7 +309,7 @@
             <h2 class="mb-4">Siap Memulai Perjalanan Belajarmu?</h2>
             <p class="lead mb-5">Bergabunglah dengan ribuan siswa lainnya yang telah merasakan manfaat perpustakaan digital
                 kami.</p>
-            <a href="/register" class="btn btn-light btn-lg px-5">Daftar Gratis Sekarang</a>
+            <a href="/register" class="btn btn-light btn-lg px-5" style="background-color: #F9B572;">Daftar Gratis Sekarang</a>
         </div>
     </section>
 @endsection

@@ -5,9 +5,9 @@
         <div class="card border-0 shadow-lg overflow-hidden">
             <div class="card-header bg-gradient-primary text-white py-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="mb-0"><i class="fas fa-book-reader me-2"></i>Absensi Karyawan</h3>
+                    <h3 class="mb-0"><i class="fas fa-book-reader me-2"></i>Absensi Pustakawan</h3>
                     <div class="badge bg-white p-2" style="color: #E9A319;">
-                        <i class="fas fa-qrcode me-1"></i> Karyawan
+                        <i class="fas fa-qrcode me-1"></i> Pustakawan
                     </div>
                 </div>
             </div>

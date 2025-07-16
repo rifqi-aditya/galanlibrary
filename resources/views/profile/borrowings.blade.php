@@ -1,13 +1,11 @@
 @extends('layouts.main')
 
-
-
 @section('main')
-
-    <div class="mb-3">
-        <a href="{{ route('profile.index') }}" class="btn btn-sm btn-dark">Kembali</a>
-    </div>
     <div class="container py-4">
+        <div class="mb-3">
+            <a href="{{ route('profile.index') }}" class="btn btn-sm btn-dark">Kembali</a>
+        </div>
+
         <h1 class="mb-4 text-primary">Riwayat Peminjaman Buku</h1>
 
         @if (session('success'))
@@ -79,8 +77,8 @@
                                     <th>Judul Buku</th>
                                     <th>Tanggal Pinjam</th>
                                     <th>Batas Pengembalian</th>
-                                    <th>Barcode</th>
                                     <th>Status</th>
+                                    <th>Barcode</th>
                                     <th>Denda</th>
                                 </tr>
                             </thead>

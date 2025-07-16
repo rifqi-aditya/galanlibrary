@@ -1,93 +1,99 @@
 @extends('layouts.main')
 
 @section('main')
-    {{-- @dd($user) --}}
-    <h3 class="mb-4">Profil Saya</h3>
-    <div class="row">
-        <div class="col-lg-2 mb-3">
-            <img src="{{ $user->pictureURL() }}" class="user-picture shadow img-fluid w-100 rounded-circle mb-3">
-            <div class="text-center">
-                <button data-url="{{ route('profile.removePicture') }}" type="button" id="profile-delete-picture-btn"
-                    class="btn btn-sm btn-danger material-icons">delete</button>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#changeUserPictureModal"
-                    class="btn btn-sm btn-success material-icons">edit</button>
+    <div class="container py-4">
+        <h3 class="mb-4">Profil Saya</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4 text-center">
+                <img src="{{ $user->pictureURL() }}" class="user-picture shadow img-fluid rounded-circle mb-3" style="width: 180px; height: 180px; object-fit: cover;">
+                <div class="d-flex justify-content-center gap-2">
+                    <button data-url="{{ route('profile.removePicture') }}" type="button" id="profile-delete-picture-btn"
+                        class="btn btn-sm btn-danger material-icons">delete</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#changeUserPictureModal"
+                        class="btn btn-sm btn-success material-icons">edit</button>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            @if(!auth()->user()->hasRole('administrator'))
+                                <tr>
+                                    <td width="30%">Nomor Induk Siswa</td>
+                                    <td>
+                                        <input type="text" class="form-control" disabled value="{{ $user->nis }}">
+                                    </td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td>Nama</td>
+                                <td>
+                                    <input type="text" class="form-control" disabled value="{{ $user->name }}">
+                                </td>
+                            </tr>
+                            @if(!auth()->user()->hasRole('administrator'))
+                                <tr>
+                                    <td>Tanggal Lahir</td>
+                                    <td>
+                                        <input type="text" class="form-control" disabled
+                                        value="{{ isset($user->date_of_birth) ? $user->date_of_birth->format('d F Y') : '' }}">
+                                    </td>
+                                </tr>
+                            @endif
+                            @if(!auth()->user()->hasRole('administrator'))
+                                <tr>
+                                    <td>Alamat</td>
+                                    <td>
+                                        <textarea class="form-control" disabled rows="3">{{ $user->address }}</textarea>
+                                    </td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td>Email</td>
+                                <td>
+                                    <input type="email" class="form-control" disabled value="{{ $user->email }}">
+                                </td>
+                            </tr>
+                            @if(!auth()->user()->hasRole('administrator'))
+                                <tr>
+                                    <td>Nomor Handphone</td>
+                                    <td>
+                                        <input type="text" class="form-control" disabled value="{{ $user->NoHandphone }}">
+                                    </td>
+                                </tr>
+                            @endif
+                        </table>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <a href="{{ route('profile.changePassword') }}" class="btn btn-dark btn-sm">Ubah Password</a>
+                            <a href="{{ route('profile.edit') }}" class="btn btn-dark btn-sm">Edit Profil</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-10 mb-3">
-            <table class="table table-borderless">
-                @if(!auth()->user()->hasRole('administrator'))
-                    <tr>
-                        <td>Nomor Induk Siswa</td>
-                        <td>
-                            <input type="text" class="form-control" disabled value="{{ $user->nis }}">
-                        </td>
-                    </tr>
-                @endif
-                <tr>
-                    <td>Nama</td>
-                    <td>
-                        <input type="text" class="form-control" disabled value="{{ $user->name }}">
-                    </td>
-                </tr>
-                @if(!auth()->user()->hasRole('administrator'))
-                    <tr>
-                        <td>Tanggal Lahir</td>
-                        <td>
-                            <input type="text" class="form-control" disabled
-                            value="{{ isset($user->date_of_birth) ? $user->date_of_birth->format('d F Y') : '' }}">
-                        </td>
-                    </tr>
-                @endif
-                @if(!auth()->user()->hasRole('administrator'))
-                    <tr>
-                        <td>Alamat</td>
-                        <td>
-                            <textarea class="form-control" disabled rows="3">{{ $user->address }}</textarea>
-                        </td>
-                    </tr>
-                @endif
-                <tr>
-                    <td>Email</td>
-                    <td>
-                        <input type="email" class="form-control" disabled value="{{ $user->email }}">
-                    </td>
-                </tr>
-                @if(!auth()->user()->hasRole('administrator'))
-                    <tr>
-                        <td>Nomor Handphone</td>
-                        <td>
-                            <input type="text" class="form-control" disabled value="{{ $user->NoHandphone }}">
-                        </td>
-                    </tr>
-                @endif
-            </table>
-            <div class="text-end">
-                <a href="{{ route('profile.changePassword') }}" class="btn btn-dark btn-sm">Ubah Password</a>
-                <a href="{{ route('profile.edit') }}" class="btn btn-dark btn-sm">Edit Profil</a>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
+
+        <hr class="my-4">
+
         @role('member')
-            <div class="col-lg-4 mb-3">
+        <div class="row">
+            <div class="col-md-4 mb-3">
                 <a href="{{ route('profile.borrowings') }}" class="text-decoration-none">
-                    <div class="card shadow-sm h-100">
+                    <div class="card shadow-sm h-100 hover-effect">
                         <div class="card-body">
-                            <div class="d-flex h-100 justify-content-between align-items-center">
-                                <div>
-                                    <span class="material-icons card-icon text-danger">
-                                        backpack
-                                    </span>
-                                </div>
-                                <div class="text-end">
-                                    <h5 class="mb-0 text-danger">Buku Yang Dipinjam</h5>
-                                </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="material-icons card-icon text-danger" style="font-size: 2.5rem;">
+                                    backpack
+                                </span>
+                                <h5 class="mb-0 text-danger">Buku Yang Dipinjam</h5>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
+        </div>
         @endrole
     </div>
 
@@ -104,14 +110,38 @@
                     @csrf
                     <div class="modal-body">
                         <input type="file" name="picture" class="form-control" required>
+                        <small class="text-muted">Format: JPG, PNG (Max 2MB)</small>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm btn-dark">Save changes</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-sm btn-dark">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('styles')
+<style>
+    .hover-effect {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hover-effect:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .card-icon {
+        font-size: 2rem;
+    }
+    .form-control:disabled {
+        background-color: #f8f9fa;
+        border-color: #e9ecef;
+    }
+    textarea.form-control:disabled {
+        resize: none;
+    }
+</style>
 @endsection
 
 @section('script')

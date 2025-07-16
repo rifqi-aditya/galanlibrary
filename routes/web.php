@@ -93,18 +93,18 @@ Route::get('/generate-users-barcodes', function () {
 });
 
 
-// absensi Karyawan
+// absensi Pustakawan
 ROute::get('/absensi', [AttendancesController::class, 'index'])->name('absensi.index');
 ROute::post('/absensi-store', [AttendancesController::class, 'store'])->name('absensi.store');
 ROute::get('/absensi/{user}', [AttendancesController::class, 'user'])->name('absensi.user');
 
 
-ROute::get('/absensi-barcode', [AttendancesController::class, 'test'])->name('absensi.test');
+ROute::get('/absensi-barcode', [AttendancesController::class, 'test'])->middleware(['auth', 'permission:create.borrowings'])->name('absensi.test'); //buat cek barcode absensi (admin)
 
 
 
 
-// end absensi Karyawan
+// end absensi Pustakawan
 
 // End Skripsi
 

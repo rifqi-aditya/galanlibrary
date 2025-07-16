@@ -15,8 +15,8 @@
                     <th>#</th>
                     <th>Judul Buku</th>
                     <th>User</th>
-                    <th>Jumlah Pinjam</th>
-                    <th>Tanggal Pinjam</th>
+                    <th>Status Peminjaman</th>
+                    <th>Tanggal Peminjaman</th>
                     <th>Tanggal Pengembalian</th>
                     <th>Denda</th>
                     @canany(['update.borrowings', 'delete.borrowings'])
