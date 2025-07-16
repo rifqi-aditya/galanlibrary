@@ -240,6 +240,28 @@
                     </a>
                 </div>
             @endcan
+            @can('create.reports')
+                <div class="col-lg-4 mb-3">
+                    <a href="https://dashboard.tawk.to/#/dashboard/6829ec7b8ec535190f11db41" class="text-decoration-none"
+                        target="_blank">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex h-100 justify-content-between align-items-center">
+                                    <div>
+                                        <span class="material-icons card-icon text-success">
+                                            chat_bubble
+                                        </span>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="mb-0 text-success">Live Chat</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endcan
+
         </div>
     </div>
 @endsection
