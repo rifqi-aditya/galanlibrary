@@ -3,7 +3,7 @@
 @section('main')
     <section style="width: 100%" class="">
         <div class="position-relative py-lg-5 py-3"
-            style="background-image: url('{{ asset('library.jpg') }}'); background-size: cover; background-position: center; height: 500px; width: 100%">
+            style="background-image: url('{{ asset('images/library.jpg') }}'); background-size: cover; background-position: center; height: 500px; width: 100%">
             <!-- Overlay untuk membuat gambar lebih gelap -->
             <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.8);"></div>
 
