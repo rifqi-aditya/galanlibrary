@@ -10,12 +10,8 @@
             "dest": "public/$1/$2"
         },
         {
-            "src": "/([^/]+\\.(?:jpg|jpeg|png|gif|svg|ico))$",
-            "dest": "public/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
+        "src": "/(.*)",
+        "dest": "/api/index.php"
         }
     ]
 }
