@@ -40,10 +40,9 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('auth.no-session');
+})->middleware(['guest']);
 
 
 // Skripsi
