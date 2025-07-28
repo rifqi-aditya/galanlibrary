@@ -4,10 +4,16 @@
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.7.4" }
     },
-    "routes": [{
+    "routes": [
+        {
+            "src": "/(css|js|images|assets|fonts)/(.*)",
+            "dest": "public/$1/$2"
+        },
+        {
         "src": "/(.*)",
         "dest": "/api/index.php"
-    }],
+        }
+    ],
         "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
