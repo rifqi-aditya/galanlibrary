@@ -15,6 +15,12 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+$app->useConfigCache('/tmp/config.php');
+$app->useRoutesCache('/tmp/routes.php');
+$app->useEventsCache('/tmp/events.php');
+$app->useServicesCache('/tmp/services.php');
+$app->usePackagesCache('/tmp/packages.php');
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
